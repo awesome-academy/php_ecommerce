@@ -36,5 +36,19 @@ return [
         'check_verify' => 'Before proceeding, please check your email for a verification link.',
         'receive_email' => 'If you did not receive the email',
         'request_email' => 'click here to request another',
+        'nav' => [
+            'brand' => 'T.E-Shopping',
+            'home' => 'Home',
+            'shop' => 'Shop',
+            'account_setting' => 'Account Setting',
+            'profile' => 'View profile',
+            'cart' => 'Cart',
+        ],
+        'welcome_page' => [
+            'heading' => 'Welcome',
+            'subheading' => 'Find your favourite product here. Enjoy your shopping time.',
+            'see_more' => 'See more',
+            'trend_products' => 'Hot Trend products',
+        ],
     ],
 ];
