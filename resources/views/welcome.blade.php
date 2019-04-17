@@ -55,76 +55,96 @@
         </a>
     </div>
 
-    <h2>@lang('common.text.welcome_page.trend_products')</h2>
-    <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Product Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                </div>
+    <div class="hot-trend-containner">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>
+                    <span class="badge badge-pill badge-danger">
+                        @lang('common.text.welcome_page.hot')
+                    </span>
+                    @lang('common.text.welcome_page.trend_products')
+                </h2>
+            </div>
+
+            <div class="col-lg-6">
+                <h3 class="d-flex justify-content-end">
+                    <a href="{{ url('shop') }}" class="btn btn-outline-info">
+                        @lang('common.text.welcome_page.see_more')
+                    </a>
+                </h3>
             </div>
         </div>
 
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Product Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Product Two</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Product Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Product Two</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Product Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Product Two</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Product Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Product Two</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Product Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Product Two</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Product Two</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -13,7 +13,11 @@
 
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/user/profile', function () {
-    return "user profile";
+    return "user.profile";
 })->name('user.profile');
+
+Route::get('/shop', function () {
+    return view('shop.index');
+})->name('shop.index');
 
 Auth::routes();
