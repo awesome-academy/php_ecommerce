@@ -13,13 +13,13 @@
                         'route' => 'register',
                     ]) !!}
                         <div class="form-group row">
-                            {!! Form::label('first_name', @trans('common.form.label.first_name'), [
+                            {!! Form::label('name', @trans('common.form.label.first_name'), [
                                 'class' => 'col-md-4 col-form-label text-md-right'
                             ]) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('first_name', '', [
-                                    'id' => 'first_name',
+                                {!! Form::text('name', '', [
+                                    'id' => 'name',
                                     'class' => 'form-control',
                                 ]) !!}
 
@@ -27,20 +27,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            {!! Form::label('last_name', @trans('common.form.label.last_name'), [
-                                'class' => 'col-md-4 col-form-label text-md-right'
-                            ]) !!}
 
-                            <div class="col-md-6">
-                                {!! Form::text('last_name', '', [
-                                    'id' => 'last_name',
-                                    'class' => 'form-control',
-                                ]) !!}
-
-                                @include('common.errors')
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             {!! Form::label('email', @trans('common.form.label.email'), [
