@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <a class="navbar-brand" href="#0">@lang('common.text.nav.brand')</a>
+        <a class="navbar-brand" href="#">@lang('common.text.nav.brand')</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -16,7 +16,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">@lang('common.text.nav.shop')
+                    <a href="{{ route('shop.index') }}" class="nav-link
+                    {{ Request::is('shop') ? 'active' : '' }}">@lang('common.text.nav.shop')
                     </a>
                 </li>
             </ul>
@@ -36,6 +37,11 @@
                         </li>
                     @endif
                 @else
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                           @lang('common.text.nav.cart')<span class="badge badge-pill badge-warning">4</span>
+                        </a>
+                    </li>
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             {{ Auth::user()->name }}

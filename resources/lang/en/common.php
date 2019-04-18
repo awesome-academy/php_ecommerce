@@ -48,7 +48,15 @@ return [
             'heading' => 'Welcome',
             'subheading' => 'Find your favourite product here. Enjoy your shopping time.',
             'see_more' => 'See more',
-            'trend_products' => 'Hot Trend products',
+            'hot' => 'Hot',
+            'trend_products' => 'Trend products',
+        ],
+        'shop_page' => [
+            'heading' => 'Welcome',
+            'subheading' => 'Find your favourite product here. Enjoy your shopping time.',
+            'category' => 'Category',
+            'available_product' => 'Available products',
+            'buy' => 'Buy now'
         ],
     ],
 ];
