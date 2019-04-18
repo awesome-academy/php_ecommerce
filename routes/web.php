@@ -12,9 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index')->name('welcome');
-Route::get('/user/profile', function () {
-    return "user.profile";
-})->name('user.profile');
+Route::get('/user/profile', 'User\UserController@index')->name('user.profile');
+Route::post('/user/profile', 'User\UserController@update')->name('user.update');
 
 Route::get('/shop', function () {
     return view('shop.index');

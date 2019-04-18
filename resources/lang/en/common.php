@@ -10,6 +10,8 @@ return [
             'create' => 'Create',
             'logout' => 'Log out',
             'reset' => 'Reset',
+            'submit' => 'Submit',
+            'cancel' => 'Cancel',
         ],
         'label' => [
             'remember_me' => 'Remember Me',
@@ -19,6 +21,9 @@ return [
             'password' => 'Password',
             'password_confirm' => 'Confirm password',
             'password_reset' => 'Password reset',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'birthday' => 'Birthday',
         ],
     ],
     'header' => [
@@ -57,6 +62,27 @@ return [
             'category' => 'Category',
             'available_product' => 'Available products',
             'buy' => 'Buy now'
+        ],
+        'profile_page' => [
+            'heading' => 'Welcome to your profile',
+            'subheading' => 'Edit or create your profile and let peoples connect to you.',
+            'profile' => 'Profile',
+            'order' => 'History Order',
+            'user_profile' => 'User profile',
+            'history' => 'History',
+            'upload_photo' => 'Upload a different photo',
+            'choose_file' => 'Choose file',
+        ],
+    ],
+    'table' => [
+        'date' => 'Date',
+        'order_id' => 'Order ID',
+        'total' => 'Total',
+        'status' => 'Status',
+    ],
+    'user' => [
+        'update' => [
+            'success' => 'Your profile was updated successfully',
         ],
     ],
 ];

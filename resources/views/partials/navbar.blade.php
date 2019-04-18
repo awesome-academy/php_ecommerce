@@ -44,12 +44,12 @@
                     </li>
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->full_name }}
                             <b class="caret"></b>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right animate slideIn">
                             <h6 class="dropdown-header ">@lang('common.text.nav.account_setting')</h6>
-                            <a class="dropdown-item {{ Request::is('profile') ? 'active' : '' }}" href="{{ route('user.profile') }}">@lang('common.text.nav.profile')</a>
+                            <a class="dropdown-item {{ Request::is('user/profile') ? 'active' : '' }}" href="{{ route('user.profile') }}">@lang('common.text.nav.profile')</a>
 
                             <a class="dropdown-item href="#">@lang('common.text.nav.cart')</a>
                             <div class="dropdown-divider"></div>

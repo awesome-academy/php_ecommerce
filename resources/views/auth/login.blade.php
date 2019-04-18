@@ -8,6 +8,7 @@
                 <div class="card-header">@lang('common.header.login')</div>
 
                 <div class="card-body">
+                    @include('common.errors')
                     {!! Form::open([
                         'method' => 'post',
                         'route' => 'login',
@@ -21,8 +22,6 @@
                                     'id' => 'email',
                                     'class' => 'form-control'
                                 ]) !!}
-
-                                @include('common.errors')
                             </div>
                         </div>
 
@@ -36,8 +35,6 @@
                                     'class' => 'form-control',
                                     'id' => 'password'
                                 ]) !!}
-
-                                @include('common.errors')
                             </div>
                         </div>
 
