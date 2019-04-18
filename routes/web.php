@@ -16,8 +16,6 @@ Route::get('/user/profile', function () {
     return "user.profile";
 })->name('user.profile');
 
-Route::get('/shop', function () {
-    return view('shop.index');
-})->name('shop.index');
+Route::get('/shop', 'ShopController@index')->name('shop.index');
 
 Auth::routes();

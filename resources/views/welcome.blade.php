@@ -76,77 +76,19 @@
         </div>
 
         <div class="row">
+            @foreach($products as $product)
             <div class="col-lg-4 col-sm-6 portfolio-item">
                 <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
+                    <a href="#"><img class="card-img-top" src="{{ asset($product->image) }}.jpg"></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Product Two</a>
+                            <a href="#">{{ $product->name }}</a>
                         </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <p class="card-text">{{ $product->description }} </p>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">Product Two</a>
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">Product Two</a>
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">Product Two</a>
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">Product Two</a>
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="{{ asset('img/products/phone-1.jpg') }}"></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">Product Two</a>
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
