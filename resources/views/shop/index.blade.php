@@ -5,7 +5,7 @@
 
 @component('partials.header')
     @slot('img')
-        img/home-bg.jpg
+        ../img/home-bg.jpg
     @endslot
 
     @slot('heading')
@@ -34,10 +34,12 @@
                 @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="{{ asset($product->image) }}.jpg"></a>
+                        <a href="{{ route('shop.show', $product->slug) }}"><img class="card-img-top" src="{{ asset($product->image) }}.jpg"></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">{{ $product->name }}</a>
+                                <a href="{{ route('shop.show', $product->slug) }}">
+                                    {{ $product->name }}
+                                </a>
                             </h4>
                             <h5>{{ $product->price }}</h5>
                             <p class="card-text">{{ $product->description }} @lang('common.text.shop_page.buy')</p>

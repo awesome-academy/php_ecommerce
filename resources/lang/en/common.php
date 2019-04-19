@@ -24,6 +24,7 @@ return [
             'address' => 'Address',
             'phone' => 'Phone',
             'birthday' => 'Birthday',
+            'comment' => 'Comment'
         ],
     ],
     'header' => [
@@ -48,6 +49,10 @@ return [
             'account_setting' => 'Account Setting',
             'profile' => 'View profile',
             'cart' => 'Cart',
+            'your_cart' => 'Your cart',
+            'view_order' => 'View order',
+            'checkout' => 'Checkout',
+            'total' => 'Total',
         ],
         'welcome_page' => [
             'heading' => 'Welcome',
@@ -61,7 +66,26 @@ return [
             'subheading' => 'Find your favourite product here. Enjoy your shopping time.',
             'category' => 'Category',
             'available_product' => 'Available products',
-            'buy' => 'Buy now'
+            'buy' => 'Buy now',
+            'single_product_page' => [
+                'heading' => 'Welcome',
+                'subheading' => 'Your happiness today is visitting our shop. Enjoy your shopping time.',
+                'product' => 'Product',
+                'detail_product' => 'Detail product',
+                'no_product' => 'No product to display. Comeback later!',
+                'also_like' => 'You might also like',
+                'in_stock' => 'in stock',
+                'add_to_cart' => 'Add to cart',
+                'quantity' => 'Quantity',
+                'review' => 'Review',
+                'leave_comment' => 'Leave comment',
+                'comment' => 'Comment',
+                'give_this' => 'Give this product',
+                'star' => 'star(s)',
+                'no_comment' => 'Nothing. Be the first',
+                'commented_at' => 'commented at',
+            ],
+
         ],
         'profile_page' => [
             'heading' => 'Welcome to your profile',
@@ -84,5 +108,8 @@ return [
         'update' => [
             'success' => 'Your profile was updated successfully',
         ],
+    ],
+    'breadcrumb' => [
+        'home' => 'Home',
     ],
 ];
