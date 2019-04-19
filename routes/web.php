@@ -15,8 +15,6 @@ Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/user/profile', 'User\UserController@index')->name('user.profile');
 Route::post('/user/profile', 'User\UserController@update')->name('user.update');
 
-Route::get('/shop', function () {
-    return view('shop.index');
-})->name('shop.index');
+Route::get('/shop', 'ShopController@index')->name('shop.index');
 
 Auth::routes();
