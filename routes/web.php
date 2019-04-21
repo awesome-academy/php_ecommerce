@@ -18,10 +18,18 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('profile', 'User\UserController@update')->name('user.update');
 });
 
+Route::get('/shop', 'ShopController@index')->name('shop.index');
+
 Route::group(['prefix' => 'shop'], function () {
     Route::get('/', 'ShopController@index')->name('shop.index');
     Route::get('{productSlug}', 'ShopController@show')->name('shop.show');
     Route::post('{productSlug}', 'Web\ReviewController@store')->name('review.store');
 });
+
+Route::resource('cart', 'CartController')->parameters([
+    '/' => 'productSlug',
+])->only(['index', 'destroy']);
+
+Route::post('/cart/{productSlug}', 'CartController@store')->name('cart.store');
 
 Auth::routes();

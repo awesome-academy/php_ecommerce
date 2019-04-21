@@ -26,6 +26,7 @@
         <li class="breadcrumb-item">
             <a href="{{ route('welcome') }}">@lang('common.breadcrumb.home')</a>
         </li>
+        <li class="breadcrumb-item"><a href="{{ route('shop.index') }}">@lang('common.breadcrumb.shop')</a></li>
         <li class="breadcrumb-item"><a href="#">{{ $product->category->name }}</a></li>
         <li class="breadcrumb-item active">{{ $product->name }}</li>
     </ol>
@@ -51,9 +52,9 @@
                 {{ $product->stock_quantity }}
                 @lang('common.text.shop_page.single_product_page.in_stock')
             </p>
-            <a href="#" class="btn btn-outline-danger">
+            <button data-slug="{{ $product->slug }}" class="add-product btn btn-outline-danger">
                 @lang('common.text.shop_page.single_product_page.add_to_cart')
-            </a>
+            </button>
         </div>
     </div>
     {{-- End Intro content --}}

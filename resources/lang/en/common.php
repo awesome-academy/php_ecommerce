@@ -42,6 +42,7 @@ return [
         'check_verify' => 'Before proceeding, please check your email for a verification link.',
         'receive_email' => 'If you did not receive the email',
         'request_email' => 'click here to request another',
+        'not_purchase' => 'You didn\'t purchase anything',
         'nav' => [
             'brand' => 'T.E-Shopping',
             'home' => 'Home',
@@ -53,6 +54,7 @@ return [
             'view_order' => 'View order',
             'checkout' => 'Checkout',
             'total' => 'Total',
+            'quantity' => 'Quantity: :qty',
         ],
         'welcome_page' => [
             'heading' => 'Welcome',
@@ -86,6 +88,10 @@ return [
                 'commented_at' => 'commented at',
             ],
 
+            'cart_page' => [
+                'heading' => 'Be careful',
+                'subheading' => 'Check your cart carefully before checkout',
+            ],
         ],
         'profile_page' => [
             'heading' => 'Welcome to your profile',
@@ -103,6 +109,10 @@ return [
         'order_id' => 'Order ID',
         'total' => 'Total',
         'status' => 'Status',
+        'product' => 'Product',
+        'price' => 'Price',
+        'quantity' => 'Quantity',
+        'action' => 'Action',
     ],
     'user' => [
         'update' => [
@@ -111,5 +121,16 @@ return [
     ],
     'breadcrumb' => [
         'home' => 'Home',
+        'shop' => 'Shop',
+        'cart' => 'Cart',
+    ],
+    'cart' => [
+        'add_success' => 'Your product has been added successfully',
+        'delete_success' => 'Your product was deleted',
+        'continue_shopping' => 'Continue shopping',
+        'update_cart' => 'Update Cart',
+        'proceed_checkout' => 'Proceed to checkout',
+        'buy_something' => 'Buy something',
+        'total_qty' => 'Total :qty item(s)',
     ],
 ];

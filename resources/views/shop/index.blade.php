@@ -18,6 +18,9 @@
 @endcomponent
 
 <div class="container">
+    <div class="alert" role="alert">
+        <strong class="alert-text"></strong>
+    </div>
 
     <div class="row">
         <div class="col-lg-3">
@@ -45,7 +48,7 @@
                             <p class="card-text">{{ $product->description }} @lang('common.text.shop_page.buy')</p>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class="btn btn-outline-primary float-right">@lang('common.text.shop_page.buy')</button>
+                            <button type="button" data-slug="{{ $product->slug }}" class="add-product btn btn-outline-primary float-right">@lang('common.text.shop_page.buy')</button>
                         </div>
                     </div>
                 </div>

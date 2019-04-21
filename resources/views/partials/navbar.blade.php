@@ -48,7 +48,7 @@
                             <h6 class="dropdown-header ">@lang('common.text.nav.account_setting')</h6>
                             <a class="dropdown-item {{ Request::is('user/profile') ? 'active' : '' }}" href="{{ route('user.profile') }}">@lang('common.text.nav.profile')</a>
 
-                            <a class="dropdown-item href="#">@lang('common.text.nav.cart')</a>
+                            <a class="dropdown-item" href="{{ route('cart.index') }}">@lang('common.text.nav.cart')</a>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item" id="logout">
                                     @lang('common.header.logout')
