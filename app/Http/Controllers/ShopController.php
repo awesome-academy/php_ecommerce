@@ -27,7 +27,7 @@ class ShopController extends Controller
     {
         $product = Product::where('slug', $productSlug)->first();
         $recommendProducts = $this->showMightLikeProduct($product->category->id, $product->id);
-        $reviews = Review::with('user')->where('product_id', $product->id)->lastest()->get();
+        $reviews = Review::with('user')->where('product_id', $product->id)->latest()->simplePaginate(5);
         $avgStar = $reviews->avg('rating');
 
         return view('shop.show')->with([
