@@ -152,3 +152,42 @@
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
 }
+
+/* Navbar-Cart style*/
+.dropdown-cart{
+    float:right;
+    padding-right: 30px;
+}
+
+.dropdown-cart .dropdown-menu-cart{
+    padding:20px;
+    top:30px !important;
+    width:350px !important;
+    left:-110px !important;
+    box-shadow:0px 5px 30px black;
+}
+
+.dropdown-menu-cart:before{
+    content: " ";
+    position:absolute;
+    top:-20px;
+    right:50px;
+    border:10px solid transparent;
+    border-bottom-color:#fff;
+}
+
+.navbar-cart-product {
+    padding-top: .6rem;
+    padding-bottom: .6rem;
+}
+
+.navbar-cart-product .navbar-cart-product-link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #343a40;
+    padding: 0;
+}
+
+.navbar-cart-product .navbar-cart-product-image {
+    max-width: 140px;
+}

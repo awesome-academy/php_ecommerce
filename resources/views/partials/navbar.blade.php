@@ -37,11 +37,8 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                           @lang('common.text.nav.cart')<span class="badge badge-pill badge-warning">4</span>
-                        </a>
-                    </li>
+                    @include('partials.cart_nav_item')
+
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             {{ Auth::user()->full_name }}
