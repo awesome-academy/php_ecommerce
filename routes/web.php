@@ -12,9 +12,16 @@
 */
 
 Route::get('/', 'HomeController@index')->name('welcome');
-Route::get('/user/profile', 'User\UserController@index')->name('user.profile');
-Route::post('/user/profile', 'User\UserController@update')->name('user.update');
 
-Route::get('/shop', 'ShopController@index')->name('shop.index');
+Route::group(['prefix' => 'user'], function () {
+    Route::get('profile', 'User\UserController@index')->name('user.profile');
+    Route::post('profile', 'User\UserController@update')->name('user.update');
+});
+
+Route::group(['prefix' => 'shop'], function () {
+    Route::get('/', 'ShopController@index')->name('shop.index');
+    Route::get('{productSlug}', 'ShopController@show')->name('shop.show');
+    Route::post('{productSlug}', 'Web\ReviewController@store')->name('review.store');
+});
 
 Auth::routes();
