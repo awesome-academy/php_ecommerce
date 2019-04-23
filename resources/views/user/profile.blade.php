@@ -25,8 +25,12 @@
                     <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">@lang('common.text.profile_page.profile')</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">@lang('common.text.profile_page.order')</a>
+                    <a href="" data-target="#order" data-toggle="tab" class="nav-link">@lang('common.text.profile_page.history')</a>
                 </li>
+                <li class="nav-item">
+                    <a href="" data-target="#request" data-toggle="tab" class="nav-link">@lang('common.text.profile_page.request')</a>
+                </li>
+
             </ul>
             <div class="tab-content py-4">
                 <div class="tab-pane active" id="profile">
@@ -141,14 +145,13 @@
                                 <input type="reset" class="btn btn-secondary" value="Cancel">
                             </div>
                         </div>
-                    </form>
                     {!! Form::close() !!}
                     <!--/row-->
-
                 </div>
-                <div class="tab-pane" id="messages">
-                    <span class="font-weight-bold">@lang('common.text.profile_page.history')</span>
-                    <table class="table table-hover table-striped">
+                <div class="tab-pane" id="order">
+                    <div class="mt-3">
+                    <span class="font-weight-bold alert alert-warning">@lang('common.text.profile_page.history_order')</span>
+                    <table class="table table-hover table-striped mt-3">
                         <thead>
                             <tr>
                                 <th>@lang('common.table.date')</th>
@@ -198,6 +201,40 @@
 
                         </tbody>
                     </table>
+                    </div>
+                    <div class="mt-5">
+                    <span class="font-weight-bold alert alert-success">@lang('common.text.profile_page.request')</span>
+                    <table class="table table-hover table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>@lang('common.table.date')</th>
+                                <th>@lang('common.table.product_name')</th>
+                                <th>@lang('common.table.product_description')</th>
+                                <th>@lang('common.table.status')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($user->requestProducts as $product)
+                            <tr>
+                                <td>
+                                   <span class="font-weight-bold">{{ $product->created_at }}</span>
+                                </td>
+                                <td>{{ $product->product_name }}</td>
+                                <td>{{ $product->description }}</td>
+                                <td><span class="badge badge-pill {{ $product->status['class'] }}">
+                                    {{ $product->status['lang'] }}</span></td>
+
+                            </tr>
+                            @empty
+                                <tr><td colspan="4" class="text-center">@lang('common.text.profile_page.request_empty')</td></tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="request">
+                    <span class="font-weight-bold">@lang('common.text.profile_page.request')</span>
+                    @include('user.request')
                 </div>
             </div>
         </div>

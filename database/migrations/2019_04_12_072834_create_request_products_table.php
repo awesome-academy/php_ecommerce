@@ -18,7 +18,7 @@ class CreateRequestProductsTable extends Migration
             $table->integer('user_id')->index();
             $table->string('product_name');
             $table->text('description');
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

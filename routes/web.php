@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index')->name('welcome');
 Route::group(['prefix' => 'user'], function () {
     Route::get('profile', 'User\UserController@index')->name('user.profile');
     Route::post('profile', 'User\UserController@update')->name('user.update');
+    Route::post('suggest', 'User\UserController@requestProduct')->name('user.request');
 });
 
 Route::get('/shop', 'ShopController@index')->name('shop.index');
