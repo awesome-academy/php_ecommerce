@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer(['partials.cart_nav_item', 'shop.cart.index'], function ($view) {
+            if (!session('cart')) {
+                $view->with([
+                    'products' => null,
+                    'totalPrice' => 0,
+                    'totalQty' => 0,
+                ]);
+            }
+
+            $oldCart = session('cart');
+            $cart = new Cart($oldCart);
+
+            $view->with([
+                'products' => $cart->items,
+                'totalPrice' => $cart->totalPrice,
+                'totalQty' => $cart->totalQty,
+            ]);
+        });
     }
 }
