@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->index();
             $table->integer('payment_id');
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->integer('total_price');
             $table->timestamps();
         });

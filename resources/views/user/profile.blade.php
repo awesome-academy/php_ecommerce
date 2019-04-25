@@ -161,44 +161,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                   <span class="font-weight-bold">2019-04-15 13:20:00</span>
-                                </td>
-                                <td>123</td>
-                                <td>321.000 VND</td>
-                                <td>Accepted</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="font-weight-bold">2019-04-15 13:20:00</span>
-                                </td>
-                                <td>123</td>
-                                <td>321.000 VND</td>
-                                <td>Accepted</td>
-                            </tr><tr>
-                                <td>
-                                   <span class="font-weight-bold">2019-04-15 13:20:00</span>
-                                </td>
-                                <td>123</td>
-                                <td>321.000 VND</td>
-                                <td>Accepted</td>
-                            </tr><tr>
-                                <td>
-                                   <span class="font-weight-bold">2019-04-15 13:20:00</span>
-                                </td>
-                                <td>123</td>
-                                <td>321.000 VND</td>
-                                <td>Accepted</td>
-                            </tr><tr>
-                                <td>
-                                   <span class="font-weight-bold">2019-04-15 13:20:00</span>
-                                </td>
-                                <td>123</td>
-                                <td>321.000 VND</td>
-                                <td>Accepted</td>
-                            </tr>
-
+                            @forelse($user->orders as $order)
+                                <tr>
+                                    <td>
+                                       <span class="font-weight-bold">{{ $order->created_at }}</span>
+                                    </td>
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->total_price }}</td>
+                                    <td><span class="badge badge-pill {{ $order->status['class'] }}">
+                                        {{ $order->status['lang'] }}</span></td>
+                                </tr>
+                            @empty
+                                <tr><td colspan="4" class="text-center">@lang('common.text.profile_page.request_empty')</td></tr>
+                            @endforelse
                         </tbody>
                     </table>
                     </div>

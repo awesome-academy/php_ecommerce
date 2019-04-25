@@ -57,7 +57,7 @@
                 </a>
             </div>
             <div class="col-sm-6">
-                <a href="#" class="btn btn-outline-info dropdown-item">
+                <a href="{{ route('order.index') }}" class="btn btn-outline-info dropdown-item">
                     @lang('common.text.nav.checkout')
                 </a>
             </div>

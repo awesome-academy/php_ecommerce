@@ -83,7 +83,7 @@
                 <a href="{{ route('shop.index') }}" class="btn btn-outline-primary">@lang('common.cart.update_cart')</a>
             </div>
             <div class="col-lg-6 col sm-12">
-                <a href="#" class="btn btn-primary float-right">@lang('common.cart.proceed_checkout')</a>
+                <a href="{{ route('order.index') }}" class="btn btn-primary float-right">@lang('common.cart.proceed_checkout')</a>
             </div>
         </div>
         @else
