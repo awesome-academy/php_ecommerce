@@ -97,11 +97,19 @@ return [
             'heading' => 'Welcome to your profile',
             'subheading' => 'Edit or create your profile and let peoples connect to you.',
             'profile' => 'Profile',
-            'order' => 'History Order',
+            'history' => 'History',
+            'history_order' => 'History Order',
+            'request' => 'Product request',
             'user_profile' => 'User profile',
             'history' => 'History',
             'upload_photo' => 'Upload a different photo',
             'choose_file' => 'Choose file',
+            'status' => [
+                'pending' => 'Pending',
+                'accepted' => 'Accepted',
+                'rejected' => 'Rejected',
+            ],
+            'request_empty' => 'Empty. Request something!',
         ],
     ],
     'table' => [
@@ -113,10 +121,15 @@ return [
         'price' => 'Price',
         'quantity' => 'Quantity',
         'action' => 'Action',
+        'product_name' => 'Product name',
+        'product_description' => 'Product description',
     ],
     'user' => [
         'update' => [
             'success' => 'Your profile was updated successfully',
+        ],
+        'request_product' => [
+            'success' => 'Your request product has been sent to admin. Wait for response!'
         ],
     ],
     'breadcrumb' => [

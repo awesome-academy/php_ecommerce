@@ -26,7 +26,12 @@ class CartController extends Controller
         $cart->addItemToCart($product, $product->id);
         session(['cart' => $cart]);
 
-        return ajaxResponseData('success', trans('common.cart.add_success'), $product, $cart);
+        return response()->json([
+            'level' => 'success',
+            'message' => trans('common.cart.add_success'),
+            'product' => $product,
+            'cart' => $cart,
+        ]);
     }
 
     public function destroy(Request $request, $productSlug)
@@ -37,14 +42,9 @@ class CartController extends Controller
         $cart->removeItem($product, $product->id);
         session(['cart' => $cart]);
 
-        return ajaxResponseData('success', trans('common.cart.delete_success'), $product, $cart);
-    }
-
-    public function ajaxResponseData($level, $message, $product, $cart)
-    {
         return response()->json([
-            'level' => $level,
-            'message' => $message,
+            'level' => 'success',
+            'message' => trans('common.cart.delete_success'),
             'product' => $product,
             'cart' => $cart,
         ]);

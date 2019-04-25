@@ -5,8 +5,10 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateProductSuggestRequest;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Models\RequestProduct;
 
 class UserController extends Controller
 {
@@ -19,8 +21,12 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $requestProduct = RequestProduct::where('user_id', $user->id)->first();
 
-        return view('user.profile')->with('user', $user);
+        return view('user.profile')->with([
+            'user' => $user,
+            'requestProduct' => $requestProduct,
+        ]);
     }
 
     public function update(UpdateUserRequest $request)
@@ -35,6 +41,20 @@ class UserController extends Controller
         return redirect()->route('user.profile')->with([
             'level' => 'success',
             'message' => @trans('common.user.update.success'),
+        ]);
+    }
+
+    public function requestProduct(CreateProductSuggestRequest $request)
+    {
+        $user = Auth::user();
+        $requestProduct = new RequestProduct();
+        $requestProduct->product_name = $request->product_name;
+        $requestProduct->description = $request->description;
+        $user->requestProducts()->save($requestProduct);
+
+        return redirect()->route('user.profile')->with([
+            'level' => 'success',
+            'message' => @trans('common.user.request_product.success'),
         ]);
     }
 }
