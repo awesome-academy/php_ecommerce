@@ -33,4 +33,6 @@ Route::resource('cart', 'CartController')->parameters([
 
 Route::post('/cart/{productSlug}', 'CartController@store')->name('cart.store');
 
+Route::resource('order', 'Web\OrderController')->only(['index', 'store']);
+
 Auth::routes();

@@ -24,7 +24,8 @@ return [
             'address' => 'Address',
             'phone' => 'Phone',
             'birthday' => 'Birthday',
-            'comment' => 'Comment'
+            'comment' => 'Comment',
+            'payment_name' => 'Payment',
         ],
     ],
     'header' => [
@@ -91,6 +92,11 @@ return [
             'cart_page' => [
                 'heading' => 'Be careful',
                 'subheading' => 'Check your cart carefully before checkout',
+                'check_order_detail' => 'Check your information and order before submit',
+                'choose_payment' => 'Choose payment',
+                'order_detail' => 'Order detail',
+                'order_detail_item' => ':name x :qty',
+                'order_note' => 'Note: You can change information in your profile page',
             ],
         ],
         'profile_page' => [
@@ -130,6 +136,10 @@ return [
         ],
         'request_product' => [
             'success' => 'Your request product has been sent to admin. Wait for response!'
+        ],
+        'order' => [
+            'success' => 'Your order has been ordered successfully. Please check you history order.',
+            'fail' => 'Your order has not been ordered yet. Try later.',
         ],
     ],
     'breadcrumb' => [

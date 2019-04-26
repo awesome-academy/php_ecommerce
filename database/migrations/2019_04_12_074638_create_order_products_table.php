@@ -18,6 +18,7 @@ class CreateOrderProductsTable extends Migration
             $table->integer('order_id')->index();
             $table->integer('product_id')->index();
             $table->integer('quantity');
+            $table->integer('price');
             $table->integer('discount')->nullable();
             $table->timestamps();
         });

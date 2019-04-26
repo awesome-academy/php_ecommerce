@@ -24,7 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['partials.cart_nav_item', 'shop.cart.index'], function ($view) {
+        view()->composer([
+            'partials.cart_nav_item',
+            'shop.cart.index',
+            'shop.cart.checkout',
+        ], function ($view) {
             if (!session('cart')) {
                 $view->with([
                     'products' => null,

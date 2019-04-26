@@ -21,12 +21,8 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $requestProduct = RequestProduct::where('user_id', $user->id)->first();
 
-        return view('user.profile')->with([
-            'user' => $user,
-            'requestProduct' => $requestProduct,
-        ]);
+        return view('user.profile')->with('user', $user);
     }
 
     public function update(UpdateUserRequest $request)
