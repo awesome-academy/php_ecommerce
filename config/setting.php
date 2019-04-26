@@ -9,4 +9,7 @@ return [
         'number_rating' => '5',
         'number_round_rating' => '1',
     ],
+    'review' => [
+        'number_retrieve' => '5',
+    ]
 ];

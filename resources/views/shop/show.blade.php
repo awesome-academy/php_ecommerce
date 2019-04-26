@@ -57,18 +57,13 @@
             </button>
         </div>
     </div>
-    {{-- End Intro content --}}
 
-    {{-- Start Write review section --}}
     @include('shop.components.form.review')
-    {{-- End Write review section --}}
 
-    {{-- Start Comment section --}}
     @include('shop.components.comment')
-    {{-- End comment section --}}
 
-    <!-- Start Also like Content -->
     @include('shop.components.recommend_product')
-    {{-- End Also like Content --}}
+
+    @include('shop.components.recently_viewed_product')
 </div>
 @endsection

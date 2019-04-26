@@ -76,6 +76,7 @@ return [
                 'detail_product' => 'Detail product',
                 'no_product' => 'No product to display. Comeback later!',
                 'also_like' => 'You might also like',
+                'viewed_product' => 'You\'ve recently seen products',
                 'in_stock' => 'in stock',
                 'add_to_cart' => 'Add to cart',
                 'quantity' => 'Quantity',

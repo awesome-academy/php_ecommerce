@@ -27,14 +27,16 @@ class ShopController extends Controller
     {
         $product = Product::where('slug', $productSlug)->first();
         $recommendProducts = $this->showMightLikeProduct($product->category->id, $product->id);
-        $reviews = Review::with('user')->where('product_id', $product->id)->latest()->simplePaginate(5);
+        $reviews = Review::with('user')->where('product_id', $product->id)->latest()->simplePaginate(config('setting.review.number_retrieve'));
         $avgStar = $reviews->avg('rating');
+        $viewedProducts = $this->storeViewedProducts($product, $product->id);
 
         return view('shop.show')->with([
             'product' => $product,
             'recommendProducts' => $recommendProducts,
             'reviews' => $reviews,
             'avgStar' => round($avgStar, config('setting.product.number_round_rating')),
+            'viewedProducts' => $viewedProducts,
         ]);
     }
 
@@ -43,6 +45,20 @@ class ShopController extends Controller
         $products = Product::where('category_id', $categoryId)
                     ->where('id', '!=', $exceptProductId)->inRandomOrder()
                     ->take(config('setting.product.number_recommendation'))->get();
+
+        return $products;
+    }
+
+    public function storeViewedProducts($product, $id)
+    {
+        $products = session('viewedProducts', null);
+        $storedProduct = $product;
+
+        if ($products && array_key_exists($id, $products)) {
+            $storedProduct = $products[$id];
+        }
+        $products[$id] = $storedProduct;
+        session(['viewedProducts' => $products]);
 
         return $products;
     }
