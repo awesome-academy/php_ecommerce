@@ -25,7 +25,7 @@ class ShopController extends Controller
 
     public function show($productSlug)
     {
-        $product = Product::where('slug', $productSlug)->first();
+        $product = Product::name($productSlug)->first();
         $recommendProducts = $this->showMightLikeProduct($product->category->id, $product->id);
         $reviews = Review::with('user')->where('product_id', $product->id)->latest()->simplePaginate(config('setting.review.number_retrieve'));
         $avgStar = $reviews->avg('rating');
@@ -61,5 +61,28 @@ class ShopController extends Controller
         session(['viewedProducts' => $products]);
 
         return $products;
+    }
+
+
+    public function filterCategory($slug)
+    {
+
+        $category = Category::name($slug)->first();
+        $productsByCategories = Product::where('category_id', $category->id)
+                                ->simplePaginate(config('setting.product.number_pagination'));
+
+        $categories = Category::all();
+
+        return view('shop.index')->with(['products'=> $productsByCategories, 'categories' => $categories]);
+    }
+
+    public function filterPrice(Request $request)
+    {
+        $priceRange = explode(';', $request->price_range);
+        $productByPrice = Product::price($priceRange[0], $priceRange[1])
+                            ->simplePaginate(config('setting.product.number_pagination'));
+        $categories = Category::all();
+
+        return view('shop.index')->with(['products'=> $productByPrice, 'categories' => $categories]);
     }
 }

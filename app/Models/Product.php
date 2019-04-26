@@ -40,6 +40,20 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function scopeName($query, $slug)
+    {
+        if (!is_null($slug)) {
+            return $query->where('slug', 'like', '%'.$slug.'%');
+        }
+
+        return $query;
+    }
+
+    public function scopePrice($query, $priceFrom, $priceTo)
+    {
+        return $query->whereBetween('price', [$priceFrom, $priceTo]);
+    }
+
     public function getQtyAttribute()
     {
         if ($this->attributes['stock_quantity'] > config('setting.number_unavailable_limit')) {

@@ -100,7 +100,18 @@ $(document).ready(function () {
             },
         });
     });
-    addDeleteListener ()
+    addDeleteListener();
+
+    $(".js-range-slider").ionRangeSlider(
+    {
+        type: "double",
+        grid: true,
+        min: 0,
+        max: 50000000,
+        from: 200,
+        to: 10000000,
+        prefix: "VND",
+    });
 
     $('.btn-quantity-sub').on('click', function(){
         var itemslug = $(this).attr('data-slug');
@@ -122,7 +133,6 @@ $(document).ready(function () {
                 appendDataCart(response, itemId, itemslug, inputQty);
             },
         });
-
     });
 
     $('.btn-quantity-plus').on('click', function(){
@@ -144,5 +154,4 @@ $(document).ready(function () {
             },
         });
     });
-
 });
