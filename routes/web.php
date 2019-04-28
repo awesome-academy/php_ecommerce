@@ -13,13 +13,11 @@
 
 Route::get('/', 'HomeController@index')->name('welcome');
 
-Route::group(['prefix' => 'user'], function () {
-    Route::get('profile', 'User\UserController@index')->name('user.profile');
-    Route::post('profile', 'User\UserController@update')->name('user.update');
-    Route::post('suggest', 'User\UserController@requestProduct')->name('user.request');
+Route::group(['prefix' => 'user', 'namespace' => 'User'], function () {
+    Route::get('profile', 'UserController@index')->name('user.profile');
+    Route::post('profile', 'UserController@update')->name('user.update');
+    Route::post('suggest', 'UserController@requestProduct')->name('user.request');
 });
-
-Route::get('/shop', 'ShopController@index')->name('shop.index');
 
 Route::group(['prefix' => 'shop'], function () {
     Route::get('/', 'ShopController@index')->name('shop.index');
@@ -40,5 +38,11 @@ Route::get('cart/decrease/{productSlug}', 'CartController@updateDecrease')->name
 Route::post('/cart/{productSlug}', 'CartController@store')->name('cart.store');
 
 Route::resource('order', 'Web\OrderController')->only(['index', 'store']);
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::resource('products', 'ProductController');
+    Route::resource('orders', 'OrderController');
+});
 
 Auth::routes();

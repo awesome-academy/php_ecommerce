@@ -10,7 +10,11 @@ return [
         'number_round_rating' => '1',
         'number_unavailable_limit' => '0',
     ],
+    'role' => [
+        'admin' => '1',
+        'guest' => '0',
+    ],
     'review' => [
         'number_retrieve' => '5',
-    ]
+    ],
 ];

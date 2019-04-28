@@ -83,4 +83,13 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function getIsAdminAttribute()
+    {
+        if ($this->attributes['role_id'] == config('setting.role.admin')) {
+            return true;
+        }
+
+        return false;
+    }
 }
