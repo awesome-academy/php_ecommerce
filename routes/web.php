@@ -31,6 +31,10 @@ Route::resource('cart', 'CartController')->parameters([
     '/' => 'productSlug',
 ])->only(['index', 'destroy']);
 
+Route::get('cart/increase/{productSlug}', 'CartController@updateIncrease')->name('cart.increase');
+
+Route::get('cart/decrease/{productSlug}', 'CartController@updateDecrease')->name('cart.decrease');
+
 Route::post('/cart/{productSlug}', 'CartController@store')->name('cart.store');
 
 Route::resource('order', 'Web\OrderController')->only(['index', 'store']);

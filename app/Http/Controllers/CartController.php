@@ -49,4 +49,30 @@ class CartController extends Controller
             'cart' => $cart,
         ]);
     }
+
+    public function updateIncrease(Request $request, $productSlug)
+    {
+        $product = Product::where('slug', $productSlug)->first();
+        $oldCart = session('cart', null);
+        $cart = new Cart($oldCart);
+        $cart->increaseItem($product, $product->id);
+        session(['cart' => $cart]);
+
+        return response()->json([
+            'cart' => $cart,
+        ]);
+    }
+
+    public function updateDecrease(Request $request, $productSlug)
+    {
+        $product = Product::where('slug', $productSlug)->first();
+        $oldCart = session('cart', null);
+        $cart = new Cart($oldCart);
+        $cart->decreaseItem($product, $product->id);
+        session(['cart' => $cart]);
+
+        return response()->json([
+            'cart' => $cart,
+        ]);
+    }
 }

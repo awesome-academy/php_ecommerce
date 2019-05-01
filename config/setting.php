@@ -8,6 +8,7 @@ return [
         'number_recommendation_limit' => '0',
         'number_rating' => '5',
         'number_round_rating' => '1',
+        'number_unavailable_limit' => '0',
     ],
     'review' => [
         'number_retrieve' => '5',

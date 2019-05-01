@@ -43,16 +43,19 @@
             <div class="qty-container">
                 <p>@lang('common.text.shop_page.single_product_page.quantity')</p>
                 <div class="qty">
-                    <button type="btn" class="btn-quantity " >-</button>
-                    <input type="text" class="input-quantity">
-                    <button type="btn" class="btn-quantity  ">+</button>
+                    <button type="btn" class="btn-quantity btn-quantity-sub" data-slug="{{ $product->slug }}"
+                        data-id="{{ $product->id }}">-</button>
+                    <input type="text" class="input-quantity" id="item-{{ $product->slug }}" value="1">
+                    <button type="btn" class="btn-quantity btn-quantity-plus" data-slug="{{ $product->slug }}"
+                        data-id="{{ $product->id }}">+</button>
                 </div>
             </div>
             <p class="font-weight-bolder">
-                {{ $product->stock_quantity }}
-                @lang('common.text.shop_page.single_product_page.in_stock')
+                @lang('common.text.shop_page.single_product_page.in_stock', [
+                    'num' => $product->stock_quantity])
             </p>
-            <button data-slug="{{ $product->slug }}" class="add-product btn btn-outline-danger">
+            <button data-slug="{{ $product->slug }}" class="add-product btn btn-outline-danger
+                {{ $product->qty ? '' : 'disabled'}}">
                 @lang('common.text.shop_page.single_product_page.add_to_cart')
             </button>
         </div>

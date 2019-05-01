@@ -78,7 +78,7 @@ return [
                 'no_product' => 'No product to display. Comeback later!',
                 'also_like' => 'You might also like',
                 'viewed_product' => 'You\'ve recently seen products',
-                'in_stock' => 'in stock',
+                'in_stock' => ':num in stock',
                 'add_to_cart' => 'Add to cart',
                 'quantity' => 'Quantity',
                 'review' => 'Review',
@@ -141,6 +141,7 @@ return [
         'order' => [
             'success' => 'Your order has been ordered successfully. Please check you history order.',
             'fail' => 'Your order has not been ordered yet. Try later.',
+            'qty_fail' => 'The stock quantity of product is not enough for this order. Try later!'
         ],
     ],
     'breadcrumb' => [

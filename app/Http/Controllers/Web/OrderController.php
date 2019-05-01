@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\Order;
+use App\Models\Product;
 use Auth;
+use DB;
 
 class OrderController extends Controller
 {
@@ -36,20 +38,38 @@ class OrderController extends Controller
             ]);
         }
 
-        $order = new Order();
-        $order->user_id = Auth::id();
-        $order->payment_id = $request->payment_name;
-        $order->total_price = $oldCart->totalPrice;
-        $order->save();
+        DB::beginTransaction();
+        try {
+            $order = new Order();
+            $order->user_id = Auth::id();
+            $order->payment_id = $request->payment_name;
+            $order->total_price = $oldCart->totalPrice;
+            $order->save();
+            foreach ($oldCart->items as $cartItem) {
+                $product = Product::findOrFail($cartItem['item']['id']);
 
-        foreach ($oldCart->items as $cartItem) {
-            $order->products()->attach($order->id, [
-                'product_id' => $cartItem['item']['id'],
-                'quantity' => $cartItem['qty'],
-                'price' => $cartItem['price'],
-            ]);
+                if ($product->stock_quantity >= $cartItem['qty']) {
+                    $product->stock_quantity -= $cartItem['qty'];
+                    $product->save();
+                    $order->products()->attach($order->id, [
+                        'product_id' => $cartItem['item']['id'],
+                        'quantity' => $cartItem['qty'],
+                        'price' => $cartItem['price'],
+                    ]);
+                } else {
+                    DB::rollback();
+
+                    return redirect()->route('user.profile')->with([
+                        'level' => 'danger',
+                        'message' => trans('common.user.order.qty_fail'),
+                    ]);
+                }
+            }
+            session()->forget('cart');
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
         }
-        session()->forget('cart');
 
         return redirect()->route('user.profile')->with([
             'level' => 'success',
