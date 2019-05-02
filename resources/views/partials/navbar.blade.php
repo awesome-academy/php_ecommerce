@@ -41,6 +41,7 @@
 
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <img src="{{ asset(@config('setting.user.image_path').Auth::user()->image) }}" class="user-img rounded-circle img-fluid">
                             {{ Auth::user()->full_name }}
                             <b class="caret"></b>
                         </a>

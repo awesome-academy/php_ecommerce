@@ -112,7 +112,7 @@ return [
             'request' => 'Product request',
             'user_profile' => 'User profile',
             'history' => 'History',
-            'upload_photo' => 'Upload a different photo',
+            'upload_photo' => 'Upload photo',
             'choose_file' => 'Choose file',
             'status' => [
                 'pending' => 'Pending',

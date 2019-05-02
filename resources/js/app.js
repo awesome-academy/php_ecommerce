@@ -11,6 +11,8 @@ require('./clean-blog.js')
 require('./logout.js')
 require('./subiz-chat.js')
 
+require('./facebook-share.js')
+
 function addDeleteListener () {
     $('.remove-item-cart').on('click', function () {
         var productSlug = $(this).attr('data-slug');
@@ -158,5 +160,10 @@ $(document).ready(function () {
 
     $('.dataTable').DataTable({
         "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
+    });
+
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 });

@@ -70,7 +70,7 @@
         &.is-fixed {
             /* when the user scrolls down, we hide the header right above the viewport */
             position: fixed;
-            top: -67px;
+            top: -78px;
             -webkit-transition: -webkit-transform 0.2s;
             -moz-transition: -moz-transform 0.2s;
             transition: transform 0.2s;
@@ -161,7 +161,7 @@
 
 .dropdown-cart .dropdown-menu-cart{
     padding:20px;
-    top:30px !important;
+    top:40px !important;
     width:350px !important;
     left:-110px !important;
     box-shadow:0px 5px 30px black;
@@ -190,4 +190,14 @@
 
 .navbar-cart-product .navbar-cart-product-image {
     max-width: 140px;
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nav-cart {
+    margin-top: 11px;
 }

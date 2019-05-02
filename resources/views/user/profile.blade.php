@@ -40,6 +40,7 @@
                     {!! Form::open([
                         'route' => 'user.update',
                         'method' => 'post',
+                        'enctype' => 'multipart/form-data',
                     ]) !!}
                         <div class="form-group row">
                             {!! Form::label('first_name', @trans('common.form.label.first_name'), [
@@ -137,6 +138,22 @@
                         </div>
 
                         <div class="form-group row">
+                            {!! Form::label('image', @trans('common.text.profile_page.upload_photo'), [
+                                'class' => 'col-lg-3 col-form-label form-control-label custom-file',
+                            ]) !!}
+                            <div class="col-lg-9 custom-file">
+                                {!! Form::file('image', [
+                                    'class' => 'custom-file-input',
+                                    'id' => 'image',
+                                ]) !!}
+                                {!! Form::label('image', @trans('common.text.profile_page.choose_file'), [
+                                    'class' => 'custom-file-label',
+                                ]) !!}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
                                 {!! Form::submit(@trans('common.form.button.submit'), [
@@ -214,12 +231,7 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center">
-            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-            <h6 class="mt-2">@lang('common.text.profile_page.upload_photo')</h6>
-            <label class="custom-file">
-                <input type="file" id="file" class="custom-file-input">
-                <span class="custom-file-control">@lang('common.text.profile_page.choose_file')</span>
-            </label>
+            <img src="{{ asset(@config('setting.user.image_path').$user->image) }}" class="mx-auto img-fluid d-block img-thumbnail" alt="avatar">
         </div>
     </div>
 </div>

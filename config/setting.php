@@ -17,4 +17,8 @@ return [
     'review' => [
         'number_retrieve' => '5',
     ],
+    'user' => [
+        'image_path' => '/img/users/',
+        'image_default' => 'default.png',
+    ],
 ];

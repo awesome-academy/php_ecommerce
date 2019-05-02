@@ -9,6 +9,7 @@ use App\Http\Requests\CreateProductSuggestRequest;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Models\RequestProduct;
+use File;
 
 class UserController extends Controller
 {
@@ -34,6 +35,22 @@ class UserController extends Controller
         $user->birthday = $request->birthday;
         $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
+
+        if ($request->image) {
+            $path = public_path(config('setting.user.image_path'));
+            $oldAva = $user->image;
+
+            $fileUpload = $request->image;
+            $nameFileUpload = uniqid() . '.' . $fileUpload->getClientOriginalExtension();
+            $fileUpload->move($path, $nameFileUpload);
+            $user->image = $nameFileUpload;
+
+            if ($user->save()) {
+                if (File::exists($path . $oldAva) && $oldAva != config('setting.user.image_default')) {
+                    File::delete($path . $oldAva);
+                }
+            }
+        }
         $user->save();
 
         return redirect()->route('user.profile')->with([
