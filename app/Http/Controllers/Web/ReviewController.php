@@ -9,6 +9,7 @@ use App\Models\Review;
 use App\Models\Comment;
 use App\Models\Rate;
 use Auth;
+use App\Http\Requests\CreateReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -17,7 +18,7 @@ class ReviewController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request, $productSlug)
+    public function store(CreateReviewRequest $request, $productSlug)
     {
         $product = Product::where('slug', $productSlug)->first();
         $review = new Review();

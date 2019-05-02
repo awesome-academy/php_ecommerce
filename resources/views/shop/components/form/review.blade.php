@@ -1,5 +1,6 @@
 <div class="dropdown-divider"></div>
 <h3>@lang('common.text.shop_page.single_product_page.review')</h3>
+@include('common.errors')
 <div class="row mt-3 mb-5">
     @include('shop.components.rate')
     <div class="col-12 col-lg-6">
@@ -14,9 +15,12 @@
                     'class' => 'col-md-4 col-form-label text-md-left'
                 ]) !!}
                 <div class="col-md-8">
-                    {!! Form::text('content', '', [
+                    {!! Form::textarea('content', '', [
                         'id' => 'content',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'rows' => '3',
+                        'cols' => '20',
+                        'required' => 'required',
                     ]) !!}
                 </div>
             </div>
