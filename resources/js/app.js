@@ -9,6 +9,7 @@ require('./bootstrap');
 
 require('./clean-blog.js')
 require('./logout.js')
+require('./subiz-chat.js')
 
 function addDeleteListener () {
     $('.remove-item-cart').on('click', function () {
@@ -153,5 +154,9 @@ $(document).ready(function () {
                 appendDataCart(response, itemId, itemslug, inputQty);
             },
         });
+    });
+
+    $('.dataTable').DataTable({
+        "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
     });
 });
