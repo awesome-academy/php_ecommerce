@@ -70,6 +70,9 @@ return [
             'category' => 'Category',
             'available_product' => 'Available products',
             'buy' => 'Buy now',
+            'no_product' => 'No products available. Comeback later!',
+            'filter_by_price' => 'Filter by price',
+            'filter_by_rating' => 'Filter by rating',
             'single_product_page' => [
                 'heading' => 'Welcome',
                 'subheading' => 'Your happiness today is visitting our shop. Enjoy your shopping time.',

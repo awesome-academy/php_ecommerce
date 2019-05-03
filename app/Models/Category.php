@@ -15,4 +15,13 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function scopeName($query, $slug)
+    {
+        if (!is_null($slug)) {
+            return $query->where('slug', 'like', '%'.$slug.'%');
+        }
+
+        return $query;
+    }
 }

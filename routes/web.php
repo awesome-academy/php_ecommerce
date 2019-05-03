@@ -25,6 +25,8 @@ Route::group(['prefix' => 'shop'], function () {
     Route::get('/', 'ShopController@index')->name('shop.index');
     Route::get('{productSlug}', 'ShopController@show')->name('shop.show');
     Route::post('{productSlug}', 'Web\ReviewController@store')->name('review.store');
+    Route::get('/filter/category/{param}', 'ShopController@filterCategory')->name('shop.filter.category');
+    Route::get('/filter/price', 'ShopController@filterPrice')->name('shop.filter.price');
 });
 
 Route::resource('cart', 'CartController')->parameters([
