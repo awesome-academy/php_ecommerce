@@ -22,7 +22,6 @@ function addDeleteListener () {
             method: 'delete',
             success: function (response)
             {
-                console.log(response);
                 $('.alert').addClass('alert-' + response.level);
                 $('.alert').css('display', 'none');
                 $('.alert-text').html(response.message);
@@ -35,9 +34,18 @@ function addDeleteListener () {
                 parent[2].remove();
                 $('.cart-qty').html(response.cart.totalQty);
                 $('.cart-price').html(response.cart.totalPrice);
+                $('.total-items-qty').html("Total " + response.cart.totalQty + " item(s)");
             },
         });
     });
+}
+
+function appendDataCart (response, itemId, itemslug, inputQty) {
+    $('.cart-qty').html(response.cart.totalQty);
+    $('.cart-price').html(response.cart.totalPrice);
+    $('.total-items-qty').html("Total " + response.cart.totalQty + " item(s)");
+    $('#cart-item-qty-' + itemId).html("Quantity: " + inputQty);
+    $('#price-product-' + itemslug).html(response.cart.items[itemId].price);
 }
 
 $(document).ready(function () {
@@ -50,6 +58,7 @@ $(document).ready(function () {
     $('.add-product').on('click', function () {
         var productSlug = $(this).attr('data-slug');
         var url = "/cart/" + productSlug;
+        var itemId = "id='cart-item-'";
         $.ajax(
         {
             url: url,
@@ -79,7 +88,8 @@ $(document).ready(function () {
                                 "<div class='pl-3'> " +
                                     "<h6 class='navbar-cart-product-link'> "
                                     + response.product.name + "</h6>" +
-                                    "<small class='d-block text-muted'>Quantity: 1"
+                                    "<small id='cart-item-qty-" + response.product.id +
+                                    "' class='d-block text-muted'>Quantity: 1"
                                     + "</small> "
                                     + "<strong class='d-block text-sm'>" + response.product.price+ "</strong>" +
                                 "</div></div></div></div>"
@@ -91,4 +101,48 @@ $(document).ready(function () {
         });
     });
     addDeleteListener ()
+
+    $('.btn-quantity-sub').on('click', function(){
+        var itemslug = $(this).attr('data-slug');
+        var itemId = $(this).attr('data-id');
+        var url = "/cart/decrease/" + itemslug;
+        var inputQty = $('#item-' + itemslug).val();
+        if (inputQty != 0) {
+            inputQty--;
+            $('#item-' + itemslug).val(inputQty);
+        }
+
+        $.ajax(
+        {
+            url: url,
+            method: 'get',
+            data: 'itemslug',
+            success: function(response)
+            {
+                appendDataCart(response, itemId, itemslug, inputQty);
+            },
+        });
+
+    });
+
+    $('.btn-quantity-plus').on('click', function(){
+        var itemslug = $(this).attr('data-slug');
+        var itemId = $(this).attr('data-id');
+        var url = "/cart/increase/" + itemslug;
+        var inputQty = $('#item-' + itemslug).val();
+        inputQty++;
+        $('#item-' + itemslug).val(inputQty);
+
+        $.ajax(
+        {
+            url: url,
+            method: 'get',
+            data: 'itemslug',
+            success: function(response)
+            {
+                appendDataCart(response, itemId, itemslug, inputQty);
+            },
+        });
+    });
+
 });

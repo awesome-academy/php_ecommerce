@@ -59,10 +59,23 @@
                         </td>
                         <td>{{ $product['item']['price'] }}</td>
                         <td>
-                            <input name="" value="{{ $product['qty'] }}" class="input-quantity">
+                            <div class="qty">
+                                <button type="btn" class="btn-quantity btn-quantity-sub"
+                                data-slug="{{ $product['item']['slug'] }}"
+                                data-id="{{ $product['item']['id'] }}">-</button>
+                                <input name="qty" value="{{ $product['qty'] }}" class="input-quantity"
+                                id="item-{{ $product['item']['slug'] }}">
+                                <button type="btn" class="btn-quantity btn-quantity-plus"
+                                data-slug="{{ $product['item']['slug'] }}"
+                                data-id="{{ $product['item']['id'] }}">+</button>
+                            </div>
                         </td>
-                        <td>{{ $product['price'] }}</td>
-                        <td><a class="btn btn-outline-danger justify-content-center close"><i class="fa fa-times"></i></a></td>
+                        <td><h6 id="price-product-{{ $product['item']['slug'] }}">{{ $product['price'] }}</h6></td>
+                        <td>
+                            <div class="remove-item-btn">
+                                <a class="btn btn-outline-danger justify-content-center close remove-item-cart" data-slug="{{ $product['item']['slug'] }}"><i class="fa fa-times"></i></a>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 @endif
@@ -71,10 +84,10 @@
         <div class="dropdown-divider"></div>
         <div class="row">
             <div class="col-lg-9 text-right">
-                <h3>@lang('common.cart.total_qty', ['qty' => $totalQty])</h3>
+                <h3 class="total-items-qty">@lang('common.cart.total_qty', ['qty' => $totalQty])</h3>
             </div>
             <div class="col-lg-3">
-                <span>{{ $totalPrice }}</span>
+                <span class="cart-price">{{ $totalPrice }}</span>
             </div>
         </div>
         <div class="row mt-3 mb-5">

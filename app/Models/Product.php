@@ -39,4 +39,13 @@ class Product extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function getQtyAttribute()
+    {
+        if ($this->attributes['stock_quantity'] > config('setting.number_unavailable_limit')) {
+            return true;
+        }
+
+        return false;
+    }
 }

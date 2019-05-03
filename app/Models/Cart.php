@@ -39,13 +39,34 @@ class Cart
 
     public function removeItem($item, $id)
     {
-        if ($this->items) {
-            if (array_key_exists($id, $this->items)) {
-                if ($this->items[$id]['qty'] > 0) {
-                    $this->totalQty -= $this->items[$id]['qty'];
-                    $this->totalPrice -= $item->price * $this->items[$id]['qty'];
-                    unset($this->items[$id]);
-                }
+        if ($this->items && array_key_exists($id, $this->items)) {
+            if ($this->items[$id]['qty'] > 0) {
+                $this->totalQty -= $this->items[$id]['qty'];
+                $this->totalPrice -= $item->price * $this->items[$id]['qty'];
+                unset($this->items[$id]);
+            }
+        }
+    }
+
+    public function increaseItem($item, $id)
+    {
+        if ($this->items && array_key_exists($id, $this->items)) {
+            $this->totalQty++;
+            $this->items[$id]['qty']++;
+            $this->items[$id]['price'] += $item->price;
+            $this->totalPrice += $item->price;
+        }
+    }
+
+    public function decreaseItem($item, $id)
+    {
+        if ($this->items && array_key_exists($id, $this->items)) {
+            $this->totalQty--;
+            $this->items[$id]['qty']--;
+            $this->items[$id]['price'] -= $item->price;
+            $this->totalPrice -= $item->price;
+            if ($this->items[$id]['qty'] <= 0) {
+                unset($this->items[$id]);
             }
         }
     }

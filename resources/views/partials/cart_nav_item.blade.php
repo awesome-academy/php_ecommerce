@@ -29,7 +29,7 @@
                                 </a>
                                 <div class="pl-3">
                                     <h6 class="navbar-cart-product-link">{{ $product['item']['name'] }}</h6>
-                                    <small class="d-block text-muted">@lang('common.text.nav.quantity', ['qty' => $product['qty']])</small>
+                                    <small id="cart-item-qty-{{ $product['item']['id'] }}" class="d-block text-muted">@lang('common.text.nav.quantity', ['qty' => $product['qty']])</small>
                                     <strong class="d-block text-sm">{{ $product['price'] }} </strong>
                                 </div>
                             </div>
