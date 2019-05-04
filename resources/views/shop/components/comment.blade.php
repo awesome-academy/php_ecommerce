@@ -2,7 +2,7 @@
 <div class="row mb-5">
     <div class="col-md-2">
         <div class="user-thumbnail">
-            <img class="user-photo" src="{{ asset('/img/users/default.png') }}"
+            <img class="img-fluid rounded-circle" src="{{ asset(@config('setting.user.image_path').$review->user->image) }}"
             alt="Avatar">
         </div>
     </div>

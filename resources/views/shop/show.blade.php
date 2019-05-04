@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('title', $product->name)
 
+@section('meta-fb-share')
+    <meta property="og:url" content="{{ URL::current() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $product->name }}" />
+    <meta property="og:description" content="{{ $product->description }}" />
+    <meta property="og:image" content="{{ asset($product->image) }}.jpg" />
+@endsection
+
 @section('content')
 
 @component('partials.header')
@@ -58,6 +66,7 @@
                 {{ $product->qty ? '' : 'disabled'}}">
                 @lang('common.text.shop_page.single_product_page.add_to_cart')
             </button>
+            <div class="fb-share-button" data-href="{{ URL::current() }}" data-layout="button_count" data-size="large"></div>
         </div>
     </div>
 
@@ -68,5 +77,9 @@
     @include('shop.components.recommend_product')
 
     @include('shop.components.recently_viewed_product')
+    <div id="fb-root"></div>
 </div>
+@push('scripts')
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5cca6a9e31fb5811"></script>
+@endpush
 @endsection

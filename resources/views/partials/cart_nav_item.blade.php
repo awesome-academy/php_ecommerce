@@ -1,5 +1,5 @@
 <li class="dropdown-cart dropdown nav-item">
-    <a href="#" class="nav-link" data-toggle="dropdown">
+    <a href="#" class="nav-link nav-cart" data-toggle="dropdown">
         @lang('common.text.nav.cart')
         <span class="badge badge-pill badge-warning cart-qty">
             @if (session('cart'))

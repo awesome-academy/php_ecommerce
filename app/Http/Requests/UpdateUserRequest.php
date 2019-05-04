@@ -30,6 +30,7 @@ class UpdateUserRequest extends FormRequest
             'phone' => 'required|numeric',
             'birthday' => 'date',
             'password' => 'min:6|confirmed',
+            'image' => 'mimes:jpg,jpeg,png,gif,svg',
         ];
     }
 }
