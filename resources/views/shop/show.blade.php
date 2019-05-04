@@ -62,7 +62,8 @@
                 @lang('common.text.shop_page.single_product_page.in_stock', [
                     'num' => $product->stock_quantity])
             </p>
-            <button data-slug="{{ $product->slug }}" class="add-product btn btn-outline-danger
+            <button data-slug="{{ $product->slug }}" data-qty="{{ $product->stock_quantity }}"
+                class="add-product btn btn-outline-danger
                 {{ $product->qty ? '' : 'disabled'}}">
                 @lang('common.text.shop_page.single_product_page.add_to_cart')
             </button>

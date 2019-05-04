@@ -8,7 +8,9 @@
     </li>
     <li class="breadcrumb-item active">@lang('admin.breadcrumb.table_order')</li>
 </ol>
-
+<div class="alert" role="alert">
+    <strong class="alert-text"></strong>
+</div>
 <div class="card mb-3" id="order">
     <div class="card-header">
         <i class="fas fa-table"></i>
@@ -50,8 +52,8 @@
                         {{ $order->status['lang'] }}</span></td>
                         <td>{{ $order->created_at }}</td>
                         <td>
-                            <a href=""><i class="fas fa-edit"></i></a>
-                            <a href=""><i class="fas fa-trash"></i></a>
+                            <a href="{{ route('orders.edit', $order->id) }}"><i class="fas fa-edit"></i></a>
+                            <button class="delete-order" data-id="{{ $order->id }}"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     @endforeach

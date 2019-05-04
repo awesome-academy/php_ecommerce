@@ -58,5 +58,29 @@ return [
         'categories' => 'Categories',
         'charts' => 'Charts'
     ],
-
+    'option' => [
+        'status' => [
+            '0' => 'Pending',
+            '1' => 'Accepted',
+            '-1' => 'Rejected',
+        ],
+    ],
+    'message' => [
+        'order' => [
+            'delete' => [
+                'success' => 'This order was deleted.',
+            ],
+        ],
+        'product' => [
+            'create' => [
+                'success' => 'This product has been created.'
+            ],
+            'delete' => [
+                'success' => 'This product was deleted.',
+            ],
+            'find' => [
+                'fail' => 'Cannot find this product',
+            ],
+        ],
+    ],
 ];

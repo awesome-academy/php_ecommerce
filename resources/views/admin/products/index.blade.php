@@ -8,10 +8,17 @@
     <li class="breadcrumb-item active">@lang('admin.breadcrumb.table_product')</li>
 </ol>
 
+<div class="alert" role="alert">
+    <strong class="alert-text"></strong>
+</div>
+@include('common.message')
 <div class="card mb-3" id="product">
     <div class="card-header">
         <i class="fas fa-table"></i>
         @lang('admin.text.table_product')
+        <div class="text-right">
+            <a href="{{ route('products.create') }}"><i class="fas fa-plus"></i>Add</a>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -52,7 +59,7 @@
                         <td>{{ $product->price }}</td>
                         <td>
                             <a href=""><i class="fas fa-edit"></i></a>
-                            <a href=""><i class="fas fa-trash"></i></a>
+                            <button class="delete-product" data-id="{{ $product->id }}"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -103,7 +110,7 @@
                         {{ $request->status['lang'] }}</span></td>
                         <td>{{ $request->created_at }}</td>
                         <td>
-                            <a href=""><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('products.requests.show', $request->id) }}"><i class="fas fa-edit"></i></a>
                             <a href=""><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
