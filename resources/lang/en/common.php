@@ -56,6 +56,7 @@ return [
             'checkout' => 'Checkout',
             'total' => 'Total',
             'quantity' => 'Quantity: :qty',
+            'admin' => 'Admin',
         ],
         'welcome_page' => [
             'heading' => 'Welcome',

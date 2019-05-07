@@ -43,6 +43,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::resource('products', 'ProductController');
     Route::resource('orders', 'OrderController');
+    Route::get('requests/{id}', 'ProductController@requestProductShow')->name('products.requests.show');
+    Route::put('requests', 'ProductController@requestProductStore')->name('products.requests.store');
 });
 
 Auth::routes();

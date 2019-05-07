@@ -25,14 +25,7 @@ function addDeleteListener () {
             method: 'delete',
             success: function (response)
             {
-                $('.alert').addClass('alert-' + response.level);
-                $('.alert').css('display', 'none');
-                $('.alert-text').html(response.message);
-                $('.alert').fadeIn(2000);
-
-                setTimeout(function () {
-                    $('.alert').fadeOut(1000);
-                }, 3000);
+                displayMessage(response);
 
                 parent[2].remove();
                 $('.cart-qty').html(response.cart.totalQty);
@@ -51,6 +44,17 @@ function appendDataCart (response, itemId, itemslug, inputQty) {
     $('#price-product-' + itemslug).html(response.cart.items[itemId].price);
 }
 
+function displayMessage(response) {
+    $('.alert').addClass('alert-' + response.level);
+    $('.alert').css('display', 'none');
+    $('.alert-text').html(response.message);
+    $('.alert').fadeIn(2000);
+
+    setTimeout(function () {
+        $('.alert').fadeOut(1000);
+    }, 3000);
+}
+
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -59,49 +63,46 @@ $(document).ready(function () {
     });
 
     $('.add-product').on('click', function () {
-        var productSlug = $(this).attr('data-slug');
-        var url = "/cart/" + productSlug;
-        var itemId = "id='cart-item-'";
-        $.ajax(
+        var qty = $(this).attr('data-qty');
+        if (qty > 0)
         {
-            url: url,
-            method: 'post',
-            data: productSlug,
-            success: function (response)
+            var productSlug = $(this).attr('data-slug');
+            var url = "/cart/" + productSlug;
+            var itemId = "id='cart-item-'";
+            $.ajax(
             {
-                $('.alert').addClass('alert-' + response.level);
-                $('.alert').css('display', 'none');
-                $('.alert-text').html(response.message);
-                $('.alert').fadeIn(2000);
+                url: url,
+                method: 'post',
+                data: productSlug,
+                success: function (response)
+                {
+                    displayMessage(response);
 
-                setTimeout(function () {
-                    $('.alert').fadeOut(1000);
-                }, 3000);
-
-                $('.cart-item-container').append(
-                    "<div class='dropdown-divider'></div>" +
-                    "<div class='navbar-cart-product'>" +
-                       "<div class='d-flex align-items-center'>" +
-                            "<a href='#'><img class='navbar-cart-product-image' " +
-                                "src='" + response.product.image + ".jpg'" + "></a> " +
-                            "<div class='w-100'> " +
-                                "<a class='close text-sm mr-2 remove-item-cart' data-slug='"
-                                + response.product.slug + "'> " +
-                                    "<i class='fa fa-times'></i></a> " +
-                                "<div class='pl-3'> " +
-                                    "<h6 class='navbar-cart-product-link'> "
-                                    + response.product.name + "</h6>" +
-                                    "<small id='cart-item-qty-" + response.product.id +
-                                    "' class='d-block text-muted'>Quantity: 1"
-                                    + "</small> "
-                                    + "<strong class='d-block text-sm'>" + response.product.price+ "</strong>" +
-                                "</div></div></div></div>"
-                    );
-                $('.cart-qty').html(response.cart.totalQty);
-                $('.cart-price').html(response.cart.totalPrice);
-                addDeleteListener();
-            },
-        });
+                    $('.cart-item-container').append(
+                        "<div class='dropdown-divider'></div>" +
+                        "<div class='navbar-cart-product'>" +
+                           "<div class='d-flex align-items-center'>" +
+                                "<a href='#'><img class='navbar-cart-product-image' " +
+                                    "src='" + response.product.image + ".jpg'" + "></a> " +
+                                "<div class='w-100'> " +
+                                    "<a class='close text-sm mr-2 remove-item-cart' data-slug='"
+                                    + response.product.slug + "'> " +
+                                        "<i class='fa fa-times'></i></a> " +
+                                    "<div class='pl-3'> " +
+                                        "<h6 class='navbar-cart-product-link'> "
+                                        + response.product.name + "</h6>" +
+                                        "<small id='cart-item-qty-" + response.product.id +
+                                        "' class='d-block text-muted'>Quantity: 1"
+                                        + "</small> "
+                                        + "<strong class='d-block text-sm'>" + response.product.price+ "</strong>" +
+                                    "</div></div></div></div>"
+                        );
+                    $('.cart-qty').html(response.cart.totalQty);
+                    $('.cart-price').html(response.cart.totalPrice);
+                    addDeleteListener();
+                },
+            });
+        }
     });
     addDeleteListener();
 
@@ -162,8 +163,53 @@ $(document).ready(function () {
         "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
     });
 
-    $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    $('.custom-file-input').on('change', function() {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+    });
+
+    $('.delete-order').on('click', function () {
+        var id = $(this).data("id");
+        var parent = $(this).parent();
+        $.ajax(
+        {
+            url: "/admin/orders/" + id,
+            method: 'delete',
+            data: {
+                id: id,
+            },
+            dataType: 'json',
+            success: function (response)
+            {
+                displayMessage(response);
+
+                parent.slideUp(300, function () {
+                    parent.closest("tr").remove();
+                });
+            }
+
+        });
+    });
+
+    $('.delete-product').on('click', function () {
+        var id = $(this).data("id");
+        var parent = $(this).parent();
+        $.ajax(
+        {
+            url: "/admin/products/" + id,
+            method: 'delete',
+            data: {
+                id: id,
+            },
+            dataType: 'json',
+            success: function (response)
+            {
+                displayMessage(response);
+
+                parent.slideUp(300, function () {
+                    parent.closest("tr").remove();
+                });
+            }
+        });
     });
 });

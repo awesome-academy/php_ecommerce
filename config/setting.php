@@ -9,6 +9,7 @@ return [
         'number_rating' => '5',
         'number_round_rating' => '1',
         'number_unavailable_limit' => '0',
+        'image_path' => 'img/products/',
     ],
     'role' => [
         'admin' => '1',
