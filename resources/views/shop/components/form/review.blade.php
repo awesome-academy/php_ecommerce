@@ -30,14 +30,8 @@
                     'class' => 'col-md-4 col-form-label text-md-left'
                 ]) !!}
 
-                <div class="col-md-4">
-                    <select name="rating">
-                        @for($i = 1; $i <= @config('setting.product.number_rating'); $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-
-                    @lang('common.text.shop_page.single_product_page.star')
+                <div class="col-md-4 display-item rating">
+                    <input type="hidden" name="rating" id="num-rating">
                 </div>
             </div>
             <div class="form-group row mb-0">
