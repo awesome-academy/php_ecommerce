@@ -16,7 +16,7 @@ require('./facebook-share.js')
 function addDeleteListener () {
     $('.remove-item-cart').on('click', function () {
         var productSlug = $(this).attr('data-slug');
-        var url = "/cart/" + productSlug;
+        var url = route('cart.destroy', productSlug);
         var parent = $(this).parents();
         $.ajax(
         {
@@ -31,8 +31,55 @@ function addDeleteListener () {
                 $('.cart-qty').html(response.cart.totalQty);
                 $('.cart-price').html(response.cart.totalPrice);
                 $('.total-items-qty').html("Total " + response.cart.totalQty + " item(s)");
+                $('.dropdown-cart').addClass('show');
+                $('.dropdown-menu-cart').addClass('show');
             },
         });
+    });
+}
+
+function addProductToCart() {
+    $('.add-product').on('click', function () {
+        var qty = $(this).attr('data-qty');
+        if (qty > 0)
+        {
+            var productSlug = $(this).attr('data-slug');
+            var url = route('cart.store', productSlug);
+            var itemId = "id='cart-item-'";
+            $.ajax(
+            {
+                url: url,
+                method: 'post',
+                data: productSlug,
+                success: function (response)
+                {
+                    displayMessage(response);
+
+                    $('.cart-item-container').append(
+                        "<div class='dropdown-divider'></div>" +
+                        "<div class='navbar-cart-product'>" +
+                           "<div class='d-flex align-items-center'>" +
+                                "<a href='#'><img class='navbar-cart-product-image' " +
+                                    "src='../" + response.product.image + ".jpg'" + "></a> " +
+                                "<div class='w-100'> " +
+                                    "<a class='close text-sm mr-2 remove-item-cart' data-slug='"
+                                    + response.product.slug + "'> " +
+                                        "<i class='fa fa-times'></i></a> " +
+                                    "<div class='pl-3'> " +
+                                        "<h6 class='navbar-cart-product-link'> "
+                                        + response.product.name + "</h6>" +
+                                        "<small id='cart-item-qty-" + response.product.id +
+                                        "' class='d-block text-muted'>Quantity: 1"
+                                        + "</small> "
+                                        + "<strong class='d-block text-sm'>" + response.product.price+ "</strong>" +
+                                    "</div></div></div></div>"
+                        );
+                    $('.cart-qty').html(response.cart.totalQty);
+                    $('.cart-price').html(response.cart.totalPrice);
+                    addDeleteListener();
+                },
+            });
+        }
     });
 }
 
@@ -55,6 +102,26 @@ function displayMessage(response) {
     }, 3000);
 }
 
+function appendDataFilter(response, i) {
+    var checkDisabilityBtn = response.products[i].stock_quantity > 0 ? "" : "disabled";
+    $('.products-container').append(
+    "<div class='col-lg-4 col-md-6 mb-4'><div class='card h-100'>" +
+        "<a href='" + route('shop.show', {productSlug: response.products[i].slug}) + "'>" +
+        "<img class='card-img-top'" + "src='" + response.products[i].image + ".jpg'></a>" +
+        "<div class='card-body'><h4 class='card-title'>" +
+                "<a href='" + route('shop.show', {productSlug: response.products[i].slug}) +"'>" +
+                response.products[i].name + "</a></h4><h5>" +
+                response.products[i].price + "</h5>" +
+            "<p class='card-text'>" + response.products[i].description +"</p></div>"+
+        "<div class='card-footer'>" +
+            "<button type='button' data-qty='" + response.products[i].stock_quantity + "' " +
+            "data-slug='"+ response.products[i].slug +"' " +
+            "class='add-product btn btn-outline-primary float-right " + checkDisabilityBtn + "'>"
+            + Lang.get('common.text.shop_page.buy') +"</button></div></div></div>"
+    );
+}
+
+
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -70,48 +137,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.add-product').on('click', function () {
-        var qty = $(this).attr('data-qty');
-        if (qty > 0)
-        {
-            var productSlug = $(this).attr('data-slug');
-            var url = "/cart/" + productSlug;
-            var itemId = "id='cart-item-'";
-            $.ajax(
-            {
-                url: url,
-                method: 'post',
-                data: productSlug,
-                success: function (response)
-                {
-                    displayMessage(response);
-
-                    $('.cart-item-container').append(
-                        "<div class='dropdown-divider'></div>" +
-                        "<div class='navbar-cart-product'>" +
-                           "<div class='d-flex align-items-center'>" +
-                                "<a href='#'><img class='navbar-cart-product-image' " +
-                                    "src='" + response.product.image + ".jpg'" + "></a> " +
-                                "<div class='w-100'> " +
-                                    "<a class='close text-sm mr-2 remove-item-cart' data-slug='"
-                                    + response.product.slug + "'> " +
-                                        "<i class='fa fa-times'></i></a> " +
-                                    "<div class='pl-3'> " +
-                                        "<h6 class='navbar-cart-product-link'> "
-                                        + response.product.name + "</h6>" +
-                                        "<small id='cart-item-qty-" + response.product.id +
-                                        "' class='d-block text-muted'>Quantity: 1"
-                                        + "</small> "
-                                        + "<strong class='d-block text-sm'>" + response.product.price+ "</strong>" +
-                                    "</div></div></div></div>"
-                        );
-                    $('.cart-qty').html(response.cart.totalQty);
-                    $('.cart-price').html(response.cart.totalPrice);
-                    addDeleteListener();
-                },
-            });
-        }
-    });
+    addProductToCart();
     addDeleteListener();
 
     $(".js-range-slider").ionRangeSlider(
@@ -125,16 +151,55 @@ $(document).ready(function () {
         prefix: "VND",
     });
 
+    $('.filter-price-btn').on('click', function() {
+        var dataFilter = $('.js-range-slider').prop('value');
+        var url = route('shop.filter.price', dataFilter);
+        $.ajax(
+        {
+            url: url,
+            method: 'get',
+            data: dataFilter,
+            success: function(response)
+            {
+                $('.pagination').css('display', 'none');
+                $('.products-container').empty();
+                for (var i = 0; i < response.products.length; i++) {
+                    appendDataFilter(response, i);
+                }
+                addProductToCart();
+            }
+        });
+    });
+
+    $('.filter-cat-btn').on('click', function() {
+        var itemslug = $(this).attr('data-slug');
+        var url = route('shop.filter.category', itemslug);
+        $.ajax(
+        {
+            url: url,
+            method: 'get',
+            data: itemslug,
+            success: function(response)
+            {
+                $('.pagination').css('display', 'none');
+                $('.products-container').empty();
+                for (var i = 0; i < response.products.length; i++) {
+                    appendDataFilter(response, i);
+                }
+                addProductToCart();
+            }
+        });
+    });
+
     $('.btn-quantity-sub').on('click', function(){
         var itemslug = $(this).attr('data-slug');
         var itemId = $(this).attr('data-id');
-        var url = "/cart/decrease/" + itemslug;
+        var url = route('cart.decrease', itemslug);
         var inputQty = $('#item-' + itemslug).val();
         if (inputQty != 0) {
             inputQty--;
             $('#item-' + itemslug).val(inputQty);
         }
-
         $.ajax(
         {
             url: url,
@@ -150,11 +215,10 @@ $(document).ready(function () {
     $('.btn-quantity-plus').on('click', function(){
         var itemslug = $(this).attr('data-slug');
         var itemId = $(this).attr('data-id');
-        var url = "/cart/increase/" + itemslug;
+        var url = route('cart.increase', itemslug);
         var inputQty = $('#item-' + itemslug).val();
         inputQty++;
         $('#item-' + itemslug).val(inputQty);
-
         $.ajax(
         {
             url: url,
@@ -181,7 +245,7 @@ $(document).ready(function () {
         var parent = $(this).parent();
         $.ajax(
         {
-            url: "/admin/orders/" + id,
+            url: route('orders.destroy', id),
             method: 'delete',
             data: {
                 id: id,
@@ -204,7 +268,7 @@ $(document).ready(function () {
         var parent = $(this).parent();
         $.ajax(
         {
-            url: "/admin/products/" + id,
+            url: route('products.destroy', id),
             method: 'delete',
             data: {
                 id: id,

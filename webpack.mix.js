@@ -13,3 +13,13 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+
+const WebpackShellPlugin = require('webpack-shell-plugin');
+
+// Add shell command plugin configured to create JavaScript language file
+mix.webpackConfig({
+    plugins:
+    [
+        new WebpackShellPlugin({onBuildStart:['php artisan lang:js --quiet'], onBuildEnd:[]})
+    ]
+});

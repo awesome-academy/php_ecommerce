@@ -23,9 +23,10 @@
 <body>
     <div id="app">
         @include('partials.navbar')
-
+        @routes
         @yield('content')
     </div>
+    <script src="{{ asset('messages.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
