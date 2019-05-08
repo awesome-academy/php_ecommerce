@@ -63,6 +63,29 @@ class ProductController extends Controller
                 ]);
     }
 
+    public function edit($id)
+    {
+        $product = Product::with('category')->findOrFail($id);
+        $categories = Category::pluck('name', 'id');
+
+        return view('admin.products.edit', [
+            'product' => $product,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function update(CreateProductRequest $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+
+        return redirect()->route('products.index')
+                ->with([
+                    'level' => 'success',
+                    'message' => trans('admin.message.product.update.success'),
+                ]);
+    }
+
     public function destroy($id)
     {
         $product = Product::findOrFail($id);

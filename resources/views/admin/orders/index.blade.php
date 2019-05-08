@@ -52,6 +52,7 @@
                         {{ $order->status['lang'] }}</span></td>
                         <td>{{ $order->created_at }}</td>
                         <td>
+                            <a href="{{ route('orders.show', $order->id) }}"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('orders.edit', $order->id) }}"><i class="fas fa-edit"></i></a>
                             <button class="delete-order" data-id="{{ $order->id }}"><i class="fas fa-trash"></i></button>
                         </td>
