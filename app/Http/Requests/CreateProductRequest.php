@@ -24,7 +24,7 @@ class CreateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'mimes:jpg, jpeg, png',
+            'image' => 'mimes:jpg,jpeg,png',
             'name' => 'required|min:6|max:50',
             'description' => 'required|min:6|max:255',
             'category_id' => 'required',

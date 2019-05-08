@@ -28,6 +28,10 @@ return [
             'user_name' => 'User name',
             'payment_type' => 'Payment Type',
             'total_price' => 'Total Price',
+            'detail_qty' => 'Quantity',
+            'detail_price' => 'Price',
+            'detail_name' => 'Product name',
+            'detail_image' => 'Image',
         ],
         'product' => [
             'name' => 'Name',
@@ -74,6 +78,9 @@ return [
         'product' => [
             'create' => [
                 'success' => 'This product has been created.'
+            ],
+            'update' => [
+                'success' => 'Your product was updated successfully',
             ],
             'delete' => [
                 'success' => 'This product was deleted.',

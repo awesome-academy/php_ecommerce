@@ -58,7 +58,7 @@
                         <td>{{ $product->stock_quantity }}</td>
                         <td>{{ $product->price }}</td>
                         <td>
-                            <a href=""><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('products.edit', $product->id) }}"><i class="fas fa-edit"></i></a>
                             <button class="delete-product" data-id="{{ $product->id }}"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>

@@ -23,6 +23,15 @@ class OrderController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $order = Order::with('products')->findOrFail($id);
+
+        return view('admin.orders.show', [
+            'order' => $order,
+        ]);
+    }
+
     public function edit($id)
     {
         $order = Order::with('user')->findOrFail($id);
