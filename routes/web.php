@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::resource('orders', 'OrderController');
     Route::get('requests/{id}', 'ProductController@requestProductShow')->name('products.requests.show');
     Route::put('requests', 'ProductController@requestProductStore')->name('products.requests.store');
+    Route::get('chart', 'AdminController@getCharts')->name('chart');
 });
 
 Auth::routes();

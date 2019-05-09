@@ -92,6 +92,7 @@ return [
                 'star' => 'star(s)',
                 'no_comment' => 'Nothing. Be the first',
                 'commented_at' => 'commented at',
+                'out_of_stock' => 'Out of stock',
             ],
 
             'cart_page' => [
