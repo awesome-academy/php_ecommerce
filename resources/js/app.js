@@ -10,7 +10,7 @@ require('./bootstrap');
 require('./clean-blog.js')
 require('./logout.js')
 require('./subiz-chat.js')
-
+require('./jquery.rating.js')
 require('./facebook-share.js')
 
 function addDeleteListener () {
@@ -59,6 +59,14 @@ $(document).ready(function () {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(".display-item").rateBar({
+        defaultStarColor : '#777777',
+        ratedStarColor : '#FFD700',
+        onRate : function(rate) {
+            $('#num-rating').val(rate);
         }
     });
 
