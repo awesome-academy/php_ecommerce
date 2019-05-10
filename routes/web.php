@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('requests/{id}', 'ProductController@requestProductShow')->name('products.requests.show');
     Route::put('requests', 'ProductController@requestProductStore')->name('products.requests.store');
     Route::get('chart', 'AdminController@getCharts')->name('chart');
+    Route::post('import', 'ProductController@importProduct')->name('products.import');
 });
 
 Auth::routes();

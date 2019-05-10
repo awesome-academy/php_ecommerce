@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\RequestProduct;
 use App\Http\Requests\CreateProductRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use File;
 
 class ProductController extends Controller
 {
@@ -128,6 +129,43 @@ class ProductController extends Controller
                     'level' => 'danger',
                     'message' => trans('admin.message.product.find.fail'),
                 ]);
+        }
+    }
+
+    public function importProduct(Request $request)
+    {
+        if ($request->hasFile('product_file')) {
+            $extension = File::extension($request->product_file->getClientOriginalName());
+            if ($extension == 'csv') {
+                $file = $request->file('product_file');
+                $data = file_get_contents($file);
+                $rows = array_map('str_getcsv', explode("\n", $data));
+                $header =  array_shift($rows);
+                foreach ($rows as $row) {
+                    if (count($row) == count($header)) {
+                        $row = array_combine($header, $row);
+                        $category = Category::name($row['category'])->first();
+                        Product::create([
+                            'name' => $row['name'],
+                            'slug' => str_slug($row['name'], '-'),
+                            'description' => $row['description'],
+                            'category_id' => $category->id,
+                            'stock_quantity' => $row['stock_quantity'],
+                            'price' => $row['price'],
+                        ]);
+                    }
+                }
+
+                return redirect()->route('products.index')->with([
+                    'message' => trans('admin.message.product.import.success'),
+                    'level' => 'success',
+                ]);
+            } else {
+                return redirect()->route('products.index')->with([
+                    'message' => trans('admin.message.product.import.fail'),
+                    'level' => 'danger'
+                ]);
+            }
         }
     }
 }

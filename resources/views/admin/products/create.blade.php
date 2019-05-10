@@ -12,6 +12,7 @@
     <div class="card-header">
         <i class="fas fa-table"></i>
         @lang('admin.text.table_product')
+        @include('admin.products.import')
     </div>
     <div class="card-body">
         {!! Form::open([
