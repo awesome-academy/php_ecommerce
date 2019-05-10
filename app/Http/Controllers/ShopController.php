@@ -68,21 +68,20 @@ class ShopController extends Controller
     {
 
         $category = Category::name($slug)->first();
-        $productsByCategories = Product::where('category_id', $category->id)
-                                ->simplePaginate(config('setting.product.number_pagination'));
+        $productsByCategories = Product::where('category_id', $category->id)->get();
 
-        $categories = Category::all();
-
-        return view('shop.index')->with(['products'=> $productsByCategories, 'categories' => $categories]);
+        return response()->json([
+            'products' => $productsByCategories,
+        ]);
     }
 
-    public function filterPrice(Request $request)
+    public function filterPrice($data)
     {
-        $priceRange = explode(';', $request->price_range);
-        $productByPrice = Product::price($priceRange[0], $priceRange[1])
-                            ->simplePaginate(config('setting.product.number_pagination'));
-        $categories = Category::all();
+        $priceRange = explode(';', $data);
+        $productByPrice = Product::price($priceRange[0], $priceRange[1])->get();
 
-        return view('shop.index')->with(['products'=> $productByPrice, 'categories' => $categories]);
+        return response()->json([
+            'products' => $productByPrice,
+        ]);
     }
 }

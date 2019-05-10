@@ -27,25 +27,20 @@
             <h1 class="my-4">@lang('common.text.shop_page.category')</h1>
             <div class="list-group">
                 @foreach($categories as $category)
-                <a href="{{ route('shop.filter.category', $category->slug) }}" class="list-group-item">
+                <a class="btn btn-outline-warning filter-cat-btn list-group-item" data-slug="{{ $category->slug }}">
                     {{ $category->name }}</a>
                 @endforeach
             </div>
 
             <h3 class="my-4">@lang('common.text.shop_page.filter_by_price')</h3>
             <div class="list-group">
-                {!! Form::open([
-                    'method' => 'get',
-                    'route' => 'shop.filter.price',
-                ]) !!}
-                    {!! Form::text('price_range', '', ['class' => 'js-range-slider']) !!}
-                    {!! Form::submit(@trans('common.form.button.submit'), ['class' => 'btn btn-outline-primary']) !!}
-                {!! Form::close() !!}
+                <input type="text" name="price_range" class="js-range-slider">
+                <button type="btn" class="filter-price-btn btn btn-primary">@lang('common.form.button.submit')</button>
             </div>
         </div>
         <div class="col-lg-9">
             <h1 class="my-4">@lang('common.text.shop_page.available_product')</h1>
-            <div class="row">
+            <div class="row products-container">
                 @forelse($products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
