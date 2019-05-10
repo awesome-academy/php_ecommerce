@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Auth;
 use DB;
+use App\Jobs\SendEmailJob;
 
 class OrderController extends Controller
 {
@@ -67,6 +68,8 @@ class OrderController extends Controller
             }
             session()->forget('cart');
             DB::commit();
+            $user = Auth::user();
+            dispatch(new SendEmailJob($order, $user));
         } catch (Exception $e) {
             DB::rollback();
         }
