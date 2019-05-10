@@ -90,4 +90,16 @@ return [
             ],
         ],
     ],
+    'chart' => [
+        'order' => [
+            'title' => [
+                'detail_month' => 'Orders by Month',
+                'detail_year' => 'Orders by Year',
+                'revenue' => 'Revenue this year',
+            ],
+            'label' => [
+                'total' => 'Total Orders',
+            ],
+        ],
+    ],
 ];

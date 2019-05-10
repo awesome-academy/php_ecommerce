@@ -22,4 +22,16 @@ return [
         'image_path' => '/img/users/',
         'image_default' => 'default.png',
     ],
+    'status' => [
+        'pending' => 0,
+        'accepted' => 1,
+        'rejected' => -1,
+    ],
+    'chart' => [
+        'num_year' => '10',
+        'dimensions' => [
+            'width' => '1000',
+            'height' => '500',
+        ],
+    ],
 ];

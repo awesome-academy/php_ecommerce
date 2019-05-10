@@ -59,8 +59,12 @@
                 </div>
             </div>
             <p class="font-weight-bolder">
-                @lang('common.text.shop_page.single_product_page.in_stock', [
+                @if(!$product->qty)
+                    <span class="badge badge-pill badge-danger">@lang('common.text.shop_page.single_product_page.out_of_stock')</span>
+                @else
+                    @lang('common.text.shop_page.single_product_page.in_stock', [
                     'num' => $product->stock_quantity])
+                @endif
             </p>
             <button data-slug="{{ $product->slug }}" data-qty="{{ $product->stock_quantity }}"
                 class="add-product btn btn-outline-danger
