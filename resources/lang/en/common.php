@@ -12,6 +12,7 @@ return [
             'reset' => 'Reset',
             'submit' => 'Submit',
             'cancel' => 'Cancel',
+            'close' => 'Close',
         ],
         'label' => [
             'remember_me' => 'Remember Me',
@@ -44,6 +45,7 @@ return [
         'receive_email' => 'If you did not receive the email',
         'request_email' => 'click here to request another',
         'not_purchase' => 'You didn\'t purchase anything',
+        'view_detail' => 'View detail',
         'nav' => [
             'brand' => 'T.E-Shopping',
             'home' => 'Home',
@@ -94,7 +96,6 @@ return [
                 'commented_at' => 'commented at',
                 'out_of_stock' => 'Out of stock',
             ],
-
             'cart_page' => [
                 'heading' => 'Be careful',
                 'subheading' => 'Check your cart carefully before checkout',
@@ -135,6 +136,7 @@ return [
         'action' => 'Action',
         'product_name' => 'Product name',
         'product_description' => 'Product description',
+        'image' => 'Image',
     ],
     'user' => [
         'update' => [
@@ -146,7 +148,8 @@ return [
         'order' => [
             'success' => 'Your order has been ordered successfully. Please check you history order.',
             'fail' => 'Your order has not been ordered yet. Try later.',
-            'qty_fail' => 'The stock quantity of product is not enough for this order. Try later!'
+            'qty_fail' => 'The stock quantity of product is not enough for this order. Try later!',
+            'find_fail' => 'Cannot find this order!',
         ],
     ],
     'breadcrumb' => [
