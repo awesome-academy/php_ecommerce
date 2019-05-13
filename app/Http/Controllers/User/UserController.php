@@ -9,7 +9,9 @@ use App\Http\Requests\CreateProductSuggestRequest;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Models\RequestProduct;
+use App\Models\Order;
 use File;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
@@ -71,5 +73,21 @@ class UserController extends Controller
             'level' => 'success',
             'message' => @trans('common.user.request_product.success'),
         ]);
+    }
+
+    public function getDetailOrder($id)
+    {
+        try {
+            $order = Order::with('products')->findOrFail($id);
+            $products = $order->products()->get();
+
+            return response()->json([
+                'order' => $products,
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => trans('common.user.order.find_fail'),
+            ]);
+        }
     }
 }

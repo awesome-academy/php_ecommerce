@@ -175,6 +175,7 @@
                                 <th>@lang('common.table.order_id')</th>
                                 <th>@lang('common.table.total')</th>
                                 <th>@lang('common.table.status')</th>
+                                <th>@lang('common.table.action')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -187,6 +188,7 @@
                                     <td>{{ $order->total_price }}</td>
                                     <td><span class="badge badge-pill {{ $order->status['class'] }}">
                                         {{ $order->status['lang'] }}</span></td>
+                                    <td><a data-toggle="modal" href="#detailModal" data-id="{{ $order->id }}" class="detail-order btn btn-primary">@lang('common.text.view_detail')</a></td>
                                 </tr>
                             @empty
                                 <tr><td colspan="4" class="text-center">@lang('common.text.profile_page.request_empty')</td></tr>
@@ -194,6 +196,7 @@
                         </tbody>
                     </table>
                     </div>
+                    @include('user.modal.show')
                     <div class="mt-5">
                     <span class="font-weight-bold alert alert-success">@lang('common.text.profile_page.request')</span>
                     <table class="table table-hover table-striped mt-3">

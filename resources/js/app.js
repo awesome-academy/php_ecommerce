@@ -5,15 +5,15 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+ require('./bootstrap');
 
-require('./clean-blog.js')
-require('./logout.js')
-require('./subiz-chat.js')
-require('./jquery.rating.js')
-require('./facebook-share.js')
+ require('./clean-blog.js')
+ require('./logout.js')
+ require('./subiz-chat.js')
+ require('./jquery.rating.js')
+ require('./facebook-share.js')
 
-function addDeleteListener () {
+ function addDeleteListener () {
     $('.remove-item-cart').on('click', function () {
         var productSlug = $(this).attr('data-slug');
         var url = route('cart.destroy', productSlug);
@@ -26,7 +26,7 @@ function addDeleteListener () {
             success: function (response)
             {
                 displayMessage(response);
-
+                $('div.divider-add').remove();
                 parent[2].remove();
                 $('.cart-qty').html(response.cart.totalQty);
                 $('.cart-price').html(response.cart.totalPrice);
@@ -54,29 +54,45 @@ function addProductToCart() {
                 success: function (response)
                 {
                     displayMessage(response);
-
-                    $('.cart-item-container').append(
-                        "<div class='dropdown-divider'></div>" +
-                        "<div class='navbar-cart-product'>" +
-                           "<div class='d-flex align-items-center'>" +
-                                "<a href='#'><img class='navbar-cart-product-image' " +
-                                    "src='../" + response.product.image + ".jpg'" + "></a> " +
-                                "<div class='w-100'> " +
-                                    "<a class='close text-sm mr-2 remove-item-cart' data-slug='"
-                                    + response.product.slug + "'> " +
-                                        "<i class='fa fa-times'></i></a> " +
-                                    "<div class='pl-3'> " +
-                                        "<h6 class='navbar-cart-product-link'> "
-                                        + response.product.name + "</h6>" +
-                                        "<small id='cart-item-qty-" + response.product.id +
-                                        "' class='d-block text-muted'>Quantity: 1"
-                                        + "</small> "
-                                        + "<strong class='d-block text-sm'>" + response.product.price+ "</strong>" +
-                                    "</div></div></div></div>"
+                    if($('#cart-item-qty-' + response.product.id).length != 0)
+                    {
+                        $('#cart-item-qty-' + response.product.id).html(
+                            Lang.get('common.text.nav.quantity',
+                            {qty: response.cart.items[response.product.id].qty})
                         );
-                    $('.cart-qty').html(response.cart.totalQty);
-                    $('.cart-price').html(response.cart.totalPrice);
-                    addDeleteListener();
+                        $('.cart-qty').html(response.cart.totalQty);
+                        $('.cart-price').html(response.cart.totalPrice);
+                        $('.dropdown-cart').addClass('show');
+                        $('.dropdown-menu-cart').addClass('show');
+                    }
+                    else
+                    {
+                        $('.cart-item-container').append(
+                            "<div class='dropdown-divider divider-add'></div>" +
+                            "<div class='navbar-cart-product'>" +
+                            "<div class='d-flex align-items-center'>" +
+                            "<a href='#'><img class='navbar-cart-product-image' " +
+                            "src='../" + response.product.image + ".jpg'" + "></a> " +
+                            "<div class='w-100'> " +
+                            "<a class='close text-sm mr-2 remove-item-cart' data-slug='"
+                            + response.product.slug + "'> " +
+                            "<i class='fa fa-times'></i></a> " +
+                            "<div class='pl-3'> " +
+                            "<h6 class='navbar-cart-product-link'> "
+                            + response.product.name + "</h6>" +
+                            "<small id='cart-item-qty-" + response.product.id +
+                            "' class='d-block text-muted'>" + Lang.get('common.text.nav.quantity',
+                             {qty: response.cart.items[response.product.id].qty})
+                            + "</small> "
+                            + "<strong class='d-block text-sm'>" + response.product.price+ "</strong>" +
+                            "</div></div></div></div>"
+                            );
+                        $('.cart-qty').html(response.cart.totalQty);
+                        $('.cart-price').html(response.cart.totalPrice);
+                        $('.dropdown-cart').addClass('show');
+                        $('.dropdown-menu-cart').addClass('show');
+                        addDeleteListener();
+                    }
                 },
             });
         }
@@ -105,20 +121,20 @@ function displayMessage(response) {
 function appendDataFilter(response, i) {
     var checkDisabilityBtn = response.products[i].stock_quantity > 0 ? "" : "disabled";
     $('.products-container').append(
-    "<div class='col-lg-4 col-md-6 mb-4'><div class='card h-100'>" +
+        "<div class='col-lg-4 col-md-6 mb-4'><div class='card h-100'>" +
         "<a href='" + route('shop.show', {productSlug: response.products[i].slug}) + "'>" +
         "<img class='card-img-top'" + "src='" + response.products[i].image + ".jpg'></a>" +
         "<div class='card-body'><h4 class='card-title'>" +
-                "<a href='" + route('shop.show', {productSlug: response.products[i].slug}) +"'>" +
-                response.products[i].name + "</a></h4><h5>" +
-                response.products[i].price + "</h5>" +
-            "<p class='card-text'>" + response.products[i].description +"</p></div>"+
+        "<a href='" + route('shop.show', {productSlug: response.products[i].slug}) +"'>" +
+        response.products[i].name + "</a></h4><h5>" +
+        response.products[i].price + "</h5>" +
+        "<p class='card-text'>" + response.products[i].description +"</p></div>"+
         "<div class='card-footer'>" +
-            "<button type='button' data-qty='" + response.products[i].stock_quantity + "' " +
-            "data-slug='"+ response.products[i].slug +"' " +
-            "class='add-product btn btn-outline-primary float-right " + checkDisabilityBtn + "'>"
-            + Lang.get('common.text.shop_page.buy') +"</button></div></div></div>"
-    );
+        "<button type='button' data-qty='" + response.products[i].stock_quantity + "' " +
+        "data-slug='"+ response.products[i].slug +"' " +
+        "class='add-product btn btn-outline-primary float-right " + checkDisabilityBtn + "'>"
+        + Lang.get('common.text.shop_page.buy') +"</button></div></div></div>"
+        );
 }
 
 
@@ -281,6 +297,33 @@ $(document).ready(function () {
                 parent.slideUp(300, function () {
                     parent.closest("tr").remove();
                 });
+            }
+        });
+    });
+
+    $('.detail-order').on('click', function () {
+        $("#detailModal").find('.modal-body #detail-order-table tbody').empty();
+        var id = $(this).data("id");
+        $.ajax(
+        {
+            url: route('user.detail', id),
+            method: 'get',
+            data: {
+                id: id,
+            },
+            dataType: 'json',
+            success: function (response)
+            {
+                for(var i = 0; i < response.order.length; i++)
+                {
+                    $("#detailModal").find('.modal-body #detail-order-table tbody').append(
+                        "<tr><td><img class='img-fluid admin-product-img' src='../"
+                        + response.order[i].image +".jpg'></td>"
+                        + "<td>" + response.order[i].name +"</td>"
+                        + "<td>" + response.order[i].pivot.quantity + "</td>"
+                        + "<td>" + response.order[i].pivot.price + "</td></tr>"
+                    );
+                }
             }
         });
     });

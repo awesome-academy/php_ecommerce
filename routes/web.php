@@ -17,6 +17,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function () {
     Route::get('profile', 'UserController@index')->name('user.profile');
     Route::post('profile', 'UserController@update')->name('user.update');
     Route::post('suggest', 'UserController@requestProduct')->name('user.request');
+    Route::get('detail/{id}', 'UserController@getDetailOrder')->name('user.detail');
 });
 
 Route::group(['prefix' => 'shop'], function () {
