@@ -40,6 +40,7 @@ return [
             'price' => 'Price',
             'image' => 'Image',
             'category' => 'Category',
+            'file' => 'Import File',
         ],
         'id' => 'ID',
         'created_at' => 'Created at',
@@ -87,6 +88,10 @@ return [
             ],
             'find' => [
                 'fail' => 'Cannot find this product',
+            ],
+            'import' => [
+                'success' => 'Imported successfully',
+                'fail' => 'Import has failed. Check your file extension. Accepted: CSV',
             ],
         ],
     ],
