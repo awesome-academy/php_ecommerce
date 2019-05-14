@@ -14,7 +14,7 @@ class ShopController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::with('category')
+        $products = Product::with('category')->latest()
                     ->simplePaginate(config('setting.product.number_pagination'));
 
         return view('shop.index')->with([
