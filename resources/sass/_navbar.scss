@@ -201,3 +201,29 @@
 .nav-cart {
     margin-top: 11px;
 }
+
+/**/
+.badge-noti{
+    padding: 3px 5px 2px;
+    top: 8px;
+    right: 5px;
+    display: inline-block;
+    min-width: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.icon-nav {
+    font-size: 20px;
+    float: left;
+}
+
+.notify-color-unread {
+    background-color: #96b6ea;
+}

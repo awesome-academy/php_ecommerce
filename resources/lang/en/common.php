@@ -59,6 +59,8 @@ return [
             'total' => 'Total',
             'quantity' => 'Quantity: :qty',
             'admin' => 'Admin',
+            'mark_as_read' => 'Mark all as read',
+            'remove_notify' => 'Remove all notifications',
         ],
         'welcome_page' => [
             'heading' => 'Welcome',
@@ -150,6 +152,7 @@ return [
             'fail' => 'Your order has not been ordered yet. Try later.',
             'qty_fail' => 'The stock quantity of product is not enough for this order. Try later!',
             'find_fail' => 'Cannot find this order!',
+            'notify' => 'Your order #:id has been ',
         ],
     ],
     'breadcrumb' => [
@@ -165,5 +168,13 @@ return [
         'proceed_checkout' => 'Proceed to checkout',
         'buy_something' => 'Buy something',
         'total_qty' => 'Total :qty item(s)',
+    ],
+    'notification' => [
+        'status' => [
+            'mark_all_read' => 'Marked all as read.',
+            'mark_single_read_success' => 'Marked this nofitication as read',
+            'mark_single_read_fail' => 'Cannot find this notification',
+            'remove_all' => 'All notifications has been deleted',
+        ],
     ],
 ];

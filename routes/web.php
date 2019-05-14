@@ -20,6 +20,12 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function () {
     Route::get('detail/{id}', 'UserController@getDetailOrder')->name('user.detail');
 });
 
+Route::group(['prefix' => 'notifications', 'namespace' => 'Web'], function () {
+    Route::get('marks', 'NotificationController@markAllAsRead')->name('notifications.marks');
+    Route::delete('remove', 'NotificationController@removeAll')->name('notifications.remove');
+    Route::get('mark/{id}', 'NotificationController@markSingleAsRead')->name('notifications.mark.single');
+});
+
 Route::group(['prefix' => 'shop'], function () {
     Route::get('/', 'ShopController@index')->name('shop.index');
     Route::get('{productSlug}', 'ShopController@show')->name('shop.show');
