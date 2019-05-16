@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Cart;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -45,6 +46,18 @@ class AppServiceProvider extends ServiceProvider
                 'totalPrice' => $cart->totalPrice,
                 'totalQty' => $cart->totalQty,
             ]);
+        });
+
+        view()->composer('*', function ($view) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $idOrders = $user->orders()->pluck('id')->toArray();
+                if (count($idOrders) > 0) {
+                    $view->with([
+                        'idOrders' => $idOrders,
+                    ]);
+                }
+            }
         });
     }
 }

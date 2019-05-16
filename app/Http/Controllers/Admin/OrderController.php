@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Events\OrderStatus;
+use App\Notifications\OrderStatusUpdated;
 
 class OrderController extends Controller
 {
@@ -49,6 +51,8 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $order->update($request->all());
+        event(new OrderStatus($order));
+        $order->user->notify(new OrderStatusUpdated($order));
 
         return redirect()->route('orders.index');
     }

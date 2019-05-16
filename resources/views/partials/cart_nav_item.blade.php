@@ -1,7 +1,7 @@
-<li class="dropdown-cart dropdown nav-item">
+<li class="dropdown-cart dropdown nav-item dropdown-cart-nav">
     <a href="#" class="nav-link nav-cart" data-toggle="dropdown">
-        @lang('common.text.nav.cart')
-        <span class="badge badge-pill badge-warning cart-qty">
+        <i class="fas fa-shopping-cart icon-nav"></i>
+        <span class="badge badge-pill badge-danger cart-qty badge-noti">
             @if (session('cart'))
                 {{ session('cart')->totalQty }}
             @else
@@ -9,7 +9,7 @@
             @endif
         </span>
     </a>
-    <div class="dropdown-menu-cart dropdown-menu dropdown-menu-right
+    <div class="dropdown-menu-cart dropdown-menu-nav dropdown-menu dropdown-menu-right
                 animate slideIn">
         <h4 class="dropdown-header">@lang('common.text.nav.your_cart')</h4>
         {{-- Data here --}}

@@ -31,5 +31,30 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
     @stack('scripts')
+    @if(Auth::check())
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var count = $('.notify-count').html();
+                var idOrders = JSON.parse("{{ json_encode($idOrders) }}");
+                function addNoti(data) {
+                    $('.notify-container').append(
+                        "<div class='row notify-color-unread notify-detail'><a class='notify-markSingleRead dropdown-item d-flex align-items-center'><div>"
+                        + "<span class='small notify-time'>" + data.order.updated_at + "</span><p class='notify-text font-weight-bold'>"
+                        + Lang.get('common.user.order.notify', {id: data.order.id})
+                        +"<span class='badge badge-pill " + data.order.status.class +"'>"
+                        +  data.order.status.lang + "</span></p></div></a></div>"
+                    );
+                    count++;
+                    $('.notify-count').html(count);
+                }
+                for (var i = 0; i < idOrders.length; i++) {
+                    window.Echo.private('order-status.' + idOrders[i])
+                    .listen('OrderStatus', (e) => {
+                        addNoti(e);
+                    });
+                }
+            });
+        </script>
+    @endif
 </body>
 </html>

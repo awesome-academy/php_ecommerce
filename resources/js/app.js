@@ -31,8 +31,8 @@
                 $('.cart-qty').html(response.cart.totalQty);
                 $('.cart-price').html(response.cart.totalPrice);
                 $('.total-items-qty').html("Total " + response.cart.totalQty + " item(s)");
-                $('.dropdown-cart').addClass('show');
-                $('.dropdown-menu-cart').addClass('show');
+                $('.dropdown-cart-nav').addClass('show');
+                $('.dropdown-menu-nav').addClass('show');
             },
         });
     });
@@ -62,8 +62,8 @@ function addProductToCart() {
                         );
                         $('.cart-qty').html(response.cart.totalQty);
                         $('.cart-price').html(response.cart.totalPrice);
-                        $('.dropdown-cart').addClass('show');
-                        $('.dropdown-menu-cart').addClass('show');
+                        $('.dropdown-cart-nav').addClass('show');
+                        $('.dropdown-menu-nav').addClass('show');
                     }
                     else
                     {
@@ -89,8 +89,8 @@ function addProductToCart() {
                             );
                         $('.cart-qty').html(response.cart.totalQty);
                         $('.cart-price').html(response.cart.totalPrice);
-                        $('.dropdown-cart').addClass('show');
-                        $('.dropdown-menu-cart').addClass('show');
+                        $('.dropdown-cart-nav').addClass('show');
+                        $('.dropdown-menu-nav').addClass('show');
                         addDeleteListener();
                     }
                 },
@@ -325,6 +325,57 @@ $(document).ready(function () {
                     );
                 }
             }
+        });
+    });
+
+    $('.notify-markAllRead').on('click', function () {
+        $.ajax(
+        {
+            url: route('notifications.marks'),
+            method: 'get',
+            success: function (response)
+            {
+                $('.notify-count').html(0);
+                $('.notify-detail').removeClass('notify-color-unread');
+            },
+        });
+    });
+
+    $('.notify-markSingleRead').on('click', function () {
+        var id = $(this).data('id');
+        var count = $('.notify-count').html();
+
+        $.ajax(
+        {
+            url: route('notifications.mark.single', id),
+            method: 'get',
+            data: {
+                id: id,
+            },
+            dataType: 'json',
+            success: function (response)
+            {
+                if(count > 0)
+                {
+                    count--;
+                }
+                $('#noti-' + id).off('click');
+                $('.notify-count').html(count);
+                $('.' + id).removeClass('notify-color-unread');
+            },
+        });
+    });
+
+    $('.notify-removeAll').on('click', function () {
+        $.ajax(
+        {
+            url: route('notifications.remove'),
+            method: 'delete',
+            success: function (response)
+            {
+                $('.notify-container').empty()
+                $('.notify-count').html(0);
+            },
         });
     });
 });
