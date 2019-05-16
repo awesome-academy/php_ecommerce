@@ -25,13 +25,7 @@
     <div class="row">
         <div class="col-lg-3">
             <h1 class="my-4">@lang('common.text.shop_page.category')</h1>
-            <div class="list-group">
-                @foreach($categories as $category)
-                <a class="btn btn-outline-warning filter-cat-btn list-group-item" data-slug="{{ $category->slug }}">
-                    {{ $category->name }}</a>
-                @endforeach
-            </div>
-
+            @include('shop.components.categories', ['categories' => $categories])
             <h3 class="my-4">@lang('common.text.shop_page.filter_by_price')</h3>
             <div class="list-group">
                 <input type="text" name="price_range" class="js-range-slider">

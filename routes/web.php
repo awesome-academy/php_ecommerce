@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::put('requests', 'ProductController@requestProductStore')->name('products.requests.store');
     Route::get('chart', 'AdminController@getCharts')->name('chart');
     Route::post('import', 'ProductController@importProduct')->name('products.import');
+    Route::resource('categories', 'CategoryController')->except(['edit']);
 });
 
 Auth::routes();

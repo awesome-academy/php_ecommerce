@@ -6,7 +6,7 @@
         </span>
     </a>
     <div class="dropdown-menu-cart dropdown-menu dropdown-menu-right animate slideIn">
-        <h4 class="dropdown-header text-right notify-markAllRead">@lang('common.text.nav.mark_as_read')</h4>
+        <a href="" class="dropdown-header text-right notify-markAllRead">@lang('common.text.nav.mark_as_read')</a>
         <div class="dropdown-divider"></div>
         <div class="notify-container">
             @foreach(Auth::user()->notifications as $notification)
@@ -28,9 +28,9 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h6 class="dropdown-item-text notify-removeAll">
+                <a href="" class="dropdown-item-text notify-removeAll">
                     @lang('common.text.nav.remove_notify')
-                </h6>
+                </a>
             </div>
         </div>
     </div>

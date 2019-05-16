@@ -15,7 +15,7 @@
             <a class="dropdown-item" href="#">@lang('admin.sidebar.users')</a>
             <a class="dropdown-item" href="{{ route('products.index') }}">@lang('admin.sidebar.products')</a>
             <a class="dropdown-item" href="{{ route('orders.index') }}">@lang('admin.sidebar.orders')</a>
-            <a class="dropdown-item" href="#">@lang('admin.sidebar.categories')</a>
+            <a class="dropdown-item" href="{{ route('categories.index') }}">@lang('admin.sidebar.categories')</a>
         </div>
     </li>
     <li class="nav-item">

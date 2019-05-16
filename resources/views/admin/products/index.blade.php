@@ -17,7 +17,8 @@
         <i class="fas fa-table"></i>
         @lang('admin.text.table_product')
         <div class="text-right">
-            <a href="{{ route('products.create') }}"><i class="fas fa-plus"></i>Add</a>
+            <a href="{{ route('products.create') }}" class="btn btn-info"><i class="fas fa-plus"></i>
+            @lang('admin.button.add')</a>
         </div>
     </div>
     <div class="card-body">

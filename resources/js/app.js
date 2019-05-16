@@ -328,7 +328,8 @@ $(document).ready(function () {
         });
     });
 
-    $('.notify-markAllRead').on('click', function () {
+    $('.notify-markAllRead').on('click', function (e) {
+        e.preventDefault();
         $.ajax(
         {
             url: route('notifications.marks'),
@@ -344,7 +345,6 @@ $(document).ready(function () {
     $('.notify-markSingleRead').on('click', function () {
         var id = $(this).data('id');
         var count = $('.notify-count').html();
-
         $.ajax(
         {
             url: route('notifications.mark.single', id),
@@ -366,7 +366,8 @@ $(document).ready(function () {
         });
     });
 
-    $('.notify-removeAll').on('click', function () {
+    $('.notify-removeAll').on('click', function (e) {
+        e.preventDefault();
         $.ajax(
         {
             url: route('notifications.remove'),

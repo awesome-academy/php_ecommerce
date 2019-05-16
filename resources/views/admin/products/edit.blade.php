@@ -51,7 +51,7 @@
                     'id' => 'category_id',
                 ]) !!}
                 <div class="col-lg-3">
-                    {!! Form::select('category_id', $categories, $product->category->name, [
+                    {!! Form::select('category_id', $categories, $product->categoryArray, [
                         'class' => 'form-control',
                         'id' => 'category_id',
                     ]) !!}
