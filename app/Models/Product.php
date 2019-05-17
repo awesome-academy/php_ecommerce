@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
 
 class Product extends Model
 {
@@ -62,5 +63,16 @@ class Product extends Model
         }
 
         return false;
+    }
+
+    public function getCategoryArrayAttribute()
+    {
+        $category = Category::findOrFail($this->attributes['category_id']);
+        if ($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+            ];
+        }
     }
 }

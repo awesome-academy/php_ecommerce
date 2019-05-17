@@ -13,6 +13,8 @@ return [
             'submit' => 'Submit',
             'cancel' => 'Cancel',
             'close' => 'Close',
+            'delete' => 'Delete',
+            'update' => 'Update',
         ],
         'label' => [
             'remember_me' => 'Remember Me',

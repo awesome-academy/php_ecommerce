@@ -8,6 +8,12 @@ return [
         'table_order' => 'Data Table Order',
         'table_product' => 'Data Table Product',
         'table_request' => 'Data Table Request product',
+        'table_category' => 'Data Category',
+        'no_product' => 'No product to show!',
+    ],
+    'button' => [
+        'add' => 'Add',
+        'add_more' => 'Add more',
     ],
     'breadcrumb' => [
         'dashboard' => 'Dashboard',
@@ -15,6 +21,7 @@ return [
         'table_user' => 'Table User',
         'table_order' => 'Table Order',
         'table_product' => 'Table Product',
+        'table_category' => 'Categories Tree',
     ],
     'table' => [
         'user' => [
@@ -41,6 +48,11 @@ return [
             'image' => 'Image',
             'category' => 'Category',
             'file' => 'Import File',
+        ],
+        'category' => [
+            'name' => 'Name',
+            'parent' => 'Parent category',
+
         ],
         'id' => 'ID',
         'created_at' => 'Created at',
@@ -92,6 +104,21 @@ return [
             'import' => [
                 'success' => 'Imported successfully',
                 'fail' => 'Import has failed. Check your file extension. Accepted: CSV',
+            ],
+        ],
+        'category' => [
+            'create' => [
+                'success' => 'This category has been created.'
+            ],
+            'update' => [
+                'success' => 'Your category was updated successfully',
+            ],
+            'delete' => [
+                'success' => 'This category was deleted.',
+                'fail' => 'Cannot delete this category. Maybe it has children or category has products!',
+            ],
+            'find' => [
+                'fail' => 'Cannot find this category',
             ],
         ],
     ],
