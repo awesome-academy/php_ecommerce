@@ -16,7 +16,7 @@
             @if (is_array($products) || is_object($products))
                 @foreach($products as $product)
                     <div class="dropdown-divider"></div>
-                    <div class="navbar-cart-product">
+                    <div class="navbar-cart-product" id="navbar-product-{{ $product['item']['slug'] }}">
                        <div class="d-flex align-items-center">
                             <a href="#">
                                 <img class="navbar-cart-product-image"

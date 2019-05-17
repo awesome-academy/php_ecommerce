@@ -28,9 +28,19 @@
                 displayMessage(response);
                 $('div.divider-add').remove();
                 parent[2].remove();
+                if($('#tr-product-' + productSlug).length)
+                {
+                    $('#tr-product-' + productSlug).remove();
+                }
+                if($('#navbar-product-' + productSlug).length)
+                {
+                    $('div.divider-add').remove();
+                    $('#navbar-product-' + productSlug).remove();
+                }
                 $('.cart-qty').html(response.cart.totalQty);
                 $('.cart-price').html(response.cart.totalPrice);
-                $('.total-items-qty').html("Total " + response.cart.totalQty + " item(s)");
+                $('.total-items-qty').html(Lang.get('common.cart.total_qty',
+                             {qty: response.cart.totalQty}));
                 $('.dropdown-cart-nav').addClass('show');
                 $('.dropdown-menu-nav').addClass('show');
             },

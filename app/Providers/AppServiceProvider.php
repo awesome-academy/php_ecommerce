@@ -56,6 +56,10 @@ class AppServiceProvider extends ServiceProvider
                     $view->with([
                         'idOrders' => $idOrders,
                     ]);
+                } else {
+                    $view->with([
+                        'idOrders' => [0],
+                    ]);
                 }
             }
         });
