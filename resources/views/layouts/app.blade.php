@@ -47,11 +47,13 @@
                     count++;
                     $('.notify-count').html(count);
                 }
-                for (var i = 0; i < idOrders.length; i++) {
-                    window.Echo.private('order-status.' + idOrders[i])
-                    .listen('OrderStatus', (e) => {
-                        addNoti(e);
-                    });
+                if (idOrders[0] != 0) {
+                    for (var i = 0; i < idOrders.length; i++) {
+                        window.Echo.private('order-status.' + idOrders[i])
+                        .listen('OrderStatus', (e) => {
+                            addNoti(e);
+                        });
+                    }
                 }
             });
         </script>

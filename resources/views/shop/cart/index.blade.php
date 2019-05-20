@@ -44,7 +44,7 @@
             <tbody>
                 @if (is_array($products) || is_object($products))
                     @foreach($products as $product)
-                    <tr>
+                    <tr id="tr-product-{{ $product['item']['slug'] }}">
                         <th scope="row">1</th>
                         <td>
                             <div class="row">
