@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Order;
-use App\Models\RequestProduct;
-use Charts;
-use DB;
+use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Repositories\Contracts\RequestProductRepositoryInterface;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
+    private $orderRepository;
+    private $requestRepository;
+
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        RequestProductRepositoryInterface $requestRepository
+    ) {
+        $this->orderRepository = $orderRepository;
+        $this->requestRepository = $requestRepository;
         $this->middleware(['auth', 'admin']);
     }
 
@@ -25,8 +30,8 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::all();
-        $orders = Order::whereStatus(config('setting.status.pending'))->count();
-        $requests = RequestProduct::all()->count();
+        $orders = $this->orderRepository->countWithStatus(config('setting.status.pending'));
+        $requests = $this->requestRepository->count();
 
         return view('admin.index', [
             'users' => $users,
@@ -37,26 +42,11 @@ class AdminController extends Controller
 
     public function getCharts()
     {
-        $ordersByMonth = Order::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"), date('Y'))->get();
-        $chartMonth = $this->createChart($ordersByMonth, trans('admin.chart.order.title.detail_month'), trans('admin.chart.order.label.total'), 'bar')->groupByMonth(date('Y'), true);
-
-        $ordersByYear = Order::all();
-        $chartYear = $this->createChart($ordersByYear, trans('admin.chart.order.title.detail_year'), trans('admin.chart.order.label.total'), 'bar')->groupByYear(config('setting.chart.num_year'));
+        $chart = $this->orderRepository->getCharts();
 
         return view('admin.chart', [
-            'chartMonth' => $chartMonth,
-            'chartYear' => $chartYear,
+            'chartMonth' => $chart['chartMonth'],
+            'chartYear' => $chart['chartYear'],
         ]);
-    }
-
-    public function createChart($data, $title, $label, $type)
-    {
-        $chart = Charts::database($data, $type, 'highcharts')
-                  ->title($title)
-                  ->elementLabel($label)
-                  ->dimensions(config('setting.chart.dimensions.width'), config('setting.chart.dimensions.height'))
-                  ->responsive(true);
-
-        return $chart;
     }
 }
