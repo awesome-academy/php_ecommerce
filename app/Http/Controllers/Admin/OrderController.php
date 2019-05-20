@@ -4,21 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Order;
+use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Models\Payment;
 use App\Events\OrderStatus;
 use App\Notifications\OrderStatusUpdated;
 
 class OrderController extends Controller
 {
-    public function __construct()
+    private $orderRepository;
+
+    public function __construct(OrderRepositoryInterface $orderRepository)
     {
         $this->middleware(['auth', 'admin']);
+        $this->orderRepository = $orderRepository;
     }
 
     public function index()
     {
-        $orders = Order::with('user')->with('payment')->get();
+        $orders = $this->orderRepository->getOrderWithUserAndPayment();
 
         return view('admin.orders.index', [
             'orders' => $orders,
@@ -27,7 +30,7 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Order::with('products')->findOrFail($id);
+        $order = $this->orderRepository->getWith('products', $id);
 
         return view('admin.orders.show', [
             'order' => $order,
@@ -36,7 +39,7 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        $order = Order::with('user')->findOrFail($id);
+        $order = $this->orderRepository->getWith('user', $id);
         $payments = Payment::pluck('name', 'id');
         $optionStatus = trans('admin.option.status');
 
@@ -49,18 +52,14 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        $order = Order::findOrFail($id);
-        $order->update($request->all());
-        event(new OrderStatus($order));
-        $order->user->notify(new OrderStatusUpdated($order));
-
-        return redirect()->route('orders.index');
+        if ($this->orderRepository->updateOrderAndSendEvent($request->all(), $id)) {
+            return redirect()->route('orders.index');
+        }
     }
 
     public function destroy($id)
     {
-        $order = Order::findOrFail($id);
-        $order->delete();
+        $this->orderRepository->delete($id);
 
         return response()->json([
             'message' => trans('admin.message.order.delete.success'),

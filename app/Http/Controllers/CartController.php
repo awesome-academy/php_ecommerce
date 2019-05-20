@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use App\Models\Product;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 
 class CartController extends Controller
 {
-    public function __construct()
+    private $productRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->middleware('auth');
+        $this->productRepository = $productRepository;
     }
 
     public function index()
@@ -20,7 +23,7 @@ class CartController extends Controller
 
     public function store(Request $request, $productSlug)
     {
-        $product = Product::where('slug', $productSlug)->first();
+        $product = $this->productRepository->findBySlug($productSlug);
         $oldCart = session('cart', null);
         $cart = new Cart($oldCart);
         $cart->addItemToCart($product, $product->id);
@@ -36,7 +39,7 @@ class CartController extends Controller
 
     public function destroy(Request $request, $productSlug)
     {
-        $product = Product::where('slug', $productSlug)->first();
+        $product = $this->productRepository->findBySlug($productSlug);
         $oldCart = session('cart', null);
         $cart = new Cart($oldCart);
         $cart->removeItem($product, $product->id);
@@ -52,7 +55,7 @@ class CartController extends Controller
 
     public function updateIncrease(Request $request, $productSlug)
     {
-        $product = Product::where('slug', $productSlug)->first();
+        $product = $this->productRepository->findBySlug($productSlug);
         $oldCart = session('cart', null);
         $cart = new Cart($oldCart);
         $cart->increaseItem($product, $product->id);
@@ -65,7 +68,7 @@ class CartController extends Controller
 
     public function updateDecrease(Request $request, $productSlug)
     {
-        $product = Product::where('slug', $productSlug)->first();
+        $product = $this->productRepository->findBySlug($productSlug);
         $oldCart = session('cart', null);
         $cart = new Cart($oldCart);
         $cart->decreaseItem($product, $product->id);

@@ -4,20 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\CreateCategoryRequest;
 
 class CategoryController extends Controller
 {
-    public function __construct()
+    private $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         $this->middleware(['auth', 'admin']);
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function index()
     {
-        $categories = Category::with('products')->where('parent_id', 0)->get();
+        $categories = $this->categoryRepository->getCategory();
 
         return view('admin.categories.index', [
             'categories' => $categories,
@@ -26,7 +29,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = $this->categoryRepository->lists('name', 'id');
         $categories->prepend('--None--', '0');
 
         return view('admin.categories.create', ['categories' => $categories]);
@@ -34,27 +37,19 @@ class CategoryController extends Controller
 
     public function store(CreateCategoryRequest $request)
     {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->slug = str_slug($category->name, '-');
-        if ($request->parent_id != 0) {
-            $category->parent_id = $request->parent_id;
-        } else {
-            $category->parent_id = 0;
+        if ($this->categoryRepository->store($request->all())) {
+            return redirect()->route('categories.index')->with([
+                'level' => 'success',
+                'message' => trans('admin.message.category.create.success'),
+            ]);
         }
-        $category->save();
-
-        return redirect()->route('categories.index')->with([
-            'level' => 'success',
-            'message' => trans('admin.message.category.create.success'),
-        ]);
     }
 
     public function show($id)
     {
         try {
-            $category = Category::with('products')->findOrFail($id);
-            $options = Category::pluck('name', 'id');
+            $category = $this->categoryRepository->getWith('products', $id);
+            $options = $this->categoryRepository->lists('name', 'id');
             $options->prepend('--None--', '0');
 
             return view('admin.categories.show', [
@@ -71,7 +66,7 @@ class CategoryController extends Controller
 
     public function update(CreateCategoryRequest $request, $id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->categoryRepository->find($id);
         if ($category) {
             $category->update($request->all());
 
@@ -84,7 +79,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->categoryRepository->find($id);
 
         if ($category->children()->count() == 0 && $category->products()->count() == 0) {
             $category->delete();
